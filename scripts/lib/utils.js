@@ -3,15 +3,15 @@
  * Works on Windows, macOS, and Linux
  */
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { execSync, spawnSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+const { execSync, spawnSync } = require("child_process");
 
 // Platform detection
-const isWindows = process.platform === 'win32';
-const isMacOS = process.platform === 'darwin';
-const isLinux = process.platform === 'linux';
+const isWindows = process.platform === "win32";
+const isMacOS = process.platform === "darwin";
+const isLinux = process.platform === "linux";
 
 /**
  * Get the user's home directory (cross-platform)
@@ -24,21 +24,35 @@ function getHomeDir() {
  * Get the Claude config directory
  */
 function getClaudeDir() {
-  return path.join(getHomeDir(), '.claude');
+  return path.join(getHomeDir(), ".claude");
 }
 
 /**
  * Get the sessions directory
  */
 function getSessionsDir() {
-  return path.join(getClaudeDir(), 'sessions');
+  return path.join(getClaudeDir(), "sessions");
 }
 
 /**
  * Get the learned skills directory
+ * Checks for project-level blueprints/.claude/skills/learned first,
+ * then falls back to user-level ~/.claude/skills/learned
  */
 function getLearnedSkillsDir() {
-  return path.join(getClaudeDir(), 'skills', 'learned');
+  // Check for project-level skills directory first
+  const projectDir = path.join(
+    process.cwd(),
+    "blueprints",
+    ".claude",
+    "skills",
+    "learned",
+  );
+  if (fs.existsSync(path.dirname(path.dirname(projectDir)))) {
+    return projectDir;
+  }
+  // Fall back to user-level directory
+  return path.join(getClaudeDir(), "skills", "learned");
 }
 
 /**
@@ -64,8 +78,8 @@ function ensureDir(dirPath) {
 function getDateString() {
   const now = new Date();
   const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
@@ -74,8 +88,8 @@ function getDateString() {
  */
 function getTimeString() {
   const now = new Date();
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
   return `${hours}:${minutes}`;
 }
 
@@ -85,11 +99,11 @@ function getTimeString() {
 function getDateTimeString() {
   const now = new Date();
   const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
@@ -108,9 +122,9 @@ function findFiles(dir, pattern, options = {}) {
   }
 
   const regexPattern = pattern
-    .replace(/\./g, '\\.')
-    .replace(/\*/g, '.*')
-    .replace(/\?/g, '.');
+    .replace(/\./g, "\\.")
+    .replace(/\*/g, ".*")
+    .replace(/\?/g, ".");
   const regex = new RegExp(`^${regexPattern}$`);
 
   function searchDir(currentDir) {
@@ -123,7 +137,8 @@ function findFiles(dir, pattern, options = {}) {
         if (entry.isFile() && regex.test(entry.name)) {
           if (maxAge !== null) {
             const stats = fs.statSync(fullPath);
-            const ageInDays = (Date.now() - stats.mtimeMs) / (1000 * 60 * 60 * 24);
+            const ageInDays =
+              (Date.now() - stats.mtimeMs) / (1000 * 60 * 60 * 24);
             if (ageInDays <= maxAge) {
               results.push({ path: fullPath, mtime: stats.mtimeMs });
             }
@@ -153,14 +168,14 @@ function findFiles(dir, pattern, options = {}) {
  */
 async function readStdinJson() {
   return new Promise((resolve, reject) => {
-    let data = '';
+    let data = "";
 
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', chunk => {
+    process.stdin.setEncoding("utf8");
+    process.stdin.on("data", (chunk) => {
       data += chunk;
     });
 
-    process.stdin.on('end', () => {
+    process.stdin.on("end", () => {
       try {
         if (data.trim()) {
           resolve(JSON.parse(data));
@@ -172,7 +187,7 @@ async function readStdinJson() {
       }
     });
 
-    process.stdin.on('error', reject);
+    process.stdin.on("error", reject);
   });
 }
 
@@ -187,7 +202,7 @@ function log(message) {
  * Output to stdout (returned to Claude)
  */
 function output(data) {
-  if (typeof data === 'object') {
+  if (typeof data === "object") {
     console.log(JSON.stringify(data));
   } else {
     console.log(data);
@@ -199,7 +214,7 @@ function output(data) {
  */
 function readFile(filePath) {
   try {
-    return fs.readFileSync(filePath, 'utf8');
+    return fs.readFileSync(filePath, "utf8");
   } catch {
     return null;
   }
@@ -210,7 +225,7 @@ function readFile(filePath) {
  */
 function writeFile(filePath, content) {
   ensureDir(path.dirname(filePath));
-  fs.writeFileSync(filePath, content, 'utf8');
+  fs.writeFileSync(filePath, content, "utf8");
 }
 
 /**
@@ -218,7 +233,7 @@ function writeFile(filePath, content) {
  */
 function appendFile(filePath, content) {
   ensureDir(path.dirname(filePath));
-  fs.appendFileSync(filePath, content, 'utf8');
+  fs.appendFileSync(filePath, content, "utf8");
 }
 
 /**
@@ -234,10 +249,10 @@ function commandExists(cmd) {
   try {
     if (isWindows) {
       // Use spawnSync to avoid shell interpolation
-      const result = spawnSync('where', [cmd], { stdio: 'pipe' });
+      const result = spawnSync("where", [cmd], { stdio: "pipe" });
       return result.status === 0;
     } else {
-      const result = spawnSync('which', [cmd], { stdio: 'pipe' });
+      const result = spawnSync("which", [cmd], { stdio: "pipe" });
       return result.status === 0;
     }
   } catch {
@@ -258,9 +273,9 @@ function commandExists(cmd) {
 function runCommand(cmd, options = {}) {
   try {
     const result = execSync(cmd, {
-      encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-      ...options
+      encoding: "utf8",
+      stdio: ["pipe", "pipe", "pipe"],
+      ...options,
     });
     return { success: true, output: result.trim() };
   } catch (err) {
@@ -272,7 +287,7 @@ function runCommand(cmd, options = {}) {
  * Check if current directory is a git repository
  */
 function isGitRepo() {
-  return runCommand('git rev-parse --git-dir').success;
+  return runCommand("git rev-parse --git-dir").success;
 }
 
 /**
@@ -281,14 +296,14 @@ function isGitRepo() {
 function getGitModifiedFiles(patterns = []) {
   if (!isGitRepo()) return [];
 
-  const result = runCommand('git diff --name-only HEAD');
+  const result = runCommand("git diff --name-only HEAD");
   if (!result.success) return [];
 
-  let files = result.output.split('\n').filter(Boolean);
+  let files = result.output.split("\n").filter(Boolean);
 
   if (patterns.length > 0) {
-    files = files.filter(file => {
-      return patterns.some(pattern => {
+    files = files.filter((file) => {
+      return patterns.some((pattern) => {
         const regex = new RegExp(pattern);
         return regex.test(file);
       });
@@ -317,7 +332,7 @@ function countInFile(filePath, pattern) {
   const content = readFile(filePath);
   if (content === null) return 0;
 
-  const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, 'g');
+  const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, "g");
   const matches = content.match(regex);
   return matches ? matches.length : 0;
 }
@@ -330,7 +345,7 @@ function grepFile(filePath, pattern) {
   if (content === null) return [];
 
   const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern);
-  const lines = content.split('\n');
+  const lines = content.split("\n");
   const results = [];
 
   lines.forEach((line, index) => {
@@ -379,5 +394,5 @@ module.exports = {
   commandExists,
   runCommand,
   isGitRepo,
-  getGitModifiedFiles
+  getGitModifiedFiles,
 };

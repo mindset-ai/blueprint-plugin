@@ -11,13 +11,13 @@
 #       "matcher": "*",
 #       "hooks": [{
 #         "type": "command",
-#         "command": "~/.claude/hooks/memory-persistence/pre-compact.sh"
+#         "command": "blueprints-claude-code/hooks/memory-persistence/pre-compact.sh"
 #       }]
 #     }]
 #   }
 # }
 
-SESSIONS_DIR="${HOME}/.claude/sessions"
+SESSIONS_DIR="blueprints/.claude/sessions"
 COMPACTION_LOG="${SESSIONS_DIR}/compaction-log.txt"
 
 mkdir -p "$SESSIONS_DIR"

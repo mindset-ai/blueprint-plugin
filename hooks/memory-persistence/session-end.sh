@@ -11,13 +11,13 @@
 #       "matcher": "*",
 #       "hooks": [{
 #         "type": "command",
-#         "command": "~/.claude/hooks/memory-persistence/session-end.sh"
+#         "command": "blueprints-claude-code/hooks/memory-persistence/session-end.sh"
 #       }]
 #     }]
 #   }
 # }
 
-SESSIONS_DIR="${HOME}/.claude/sessions"
+SESSIONS_DIR="blueprints/.claude/sessions"
 TODAY=$(date '+%Y-%m-%d')
 SESSION_FILE="${SESSIONS_DIR}/${TODAY}-session.tmp"
 

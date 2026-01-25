@@ -11,14 +11,14 @@
 #       "matcher": "*",
 #       "hooks": [{
 #         "type": "command",
-#         "command": "~/.claude/hooks/memory-persistence/session-start.sh"
+#         "command": "blueprints-claude-code/hooks/memory-persistence/session-start.sh"
 #       }]
 #     }]
 #   }
 # }
 
-SESSIONS_DIR="${HOME}/.claude/sessions"
-LEARNED_DIR="${HOME}/.claude/skills/learned"
+SESSIONS_DIR="blueprints/.claude/sessions"
+LEARNED_DIR="blueprints/.claude/skills/learned"
 
 # Check for recent session files (last 7 days)
 recent_sessions=$(find "$SESSIONS_DIR" -name "*.tmp" -mtime -7 2>/dev/null | wc -l | tr -d ' ')

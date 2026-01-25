@@ -4,7 +4,7 @@ description: Enforce test-driven development workflow. Scaffold interfaces, gene
 
 # TDD Command
 
-This command invokes the **tdd-guide** agent to enforce test-driven development methodology.
+This command invokes the **tdd-guide** agent to enforce test-driven development methodology for the Mindset AI platform.
 
 ## What This Command Does
 
@@ -17,7 +17,7 @@ This command invokes the **tdd-guide** agent to enforce test-driven development 
 ## When to Use
 
 Use `/tdd` when:
-- Implementing new features
+- Implementing new features (AI agents, widgets, controllers)
 - Adding new functions/components
 - Fixing bugs (write test that reproduces bug first)
 - Refactoring existing code
@@ -38,7 +38,7 @@ The tdd-guide agent will:
 ## TDD Cycle
 
 ```
-RED → GREEN → REFACTOR → REPEAT
+RED -> GREEN -> REFACTOR -> REPEAT
 
 RED:      Write a failing test
 GREEN:    Write minimal code to pass
@@ -46,230 +46,663 @@ REFACTOR: Improve code, keep tests passing
 REPEAT:   Next feature/scenario
 ```
 
-## Example Usage
+## Related Skill
+
+For comprehensive testing patterns and conventions, see the testing skill:
+`blueprints/.claude/skills/testing/SKILL.md`
+
+---
+
+## Example: Flutter GetX Controller (Widget Engagement)
 
 ```
-User: /tdd I need a function to calculate market liquidity score
+User: /tdd I need a controller to track widget engagement metrics
 
 Agent (tdd-guide):
-# TDD Session: Market Liquidity Score Calculator
+# TDD Session: Widget Engagement Controller
 
 ## Step 1: Define Interface (SCAFFOLD)
 
-```typescript
-// lib/liquidity.ts
-export interface MarketData {
-  totalVolume: number
-  bidAskSpread: number
-  activeTraders: number
-  lastTradeTime: Date
+```dart
+// lib/src/features/analytics/widget_engagement_controller.dart
+import 'package:get/get.dart';
+
+class WidgetEngagement {
+  final String widgetId;
+  final int viewCount;
+  final int interactionCount;
+  final Duration timeSpent;
+
+  WidgetEngagement({
+    required this.widgetId,
+    required this.viewCount,
+    required this.interactionCount,
+    required this.timeSpent,
+  });
+
+  double get engagementScore {
+    // TODO: Implementation
+    throw UnimplementedError();
+  }
 }
 
-export function calculateLiquidityScore(market: MarketData): number {
-  // TODO: Implementation
-  throw new Error('Not implemented')
+class WidgetEngagementController extends GetxController {
+  final RxList<WidgetEngagement> engagements = <WidgetEngagement>[].obs;
+  final RxBool isLoading = false.obs;
+  final Rx<String?> error = Rx<String?>(null);
+
+  Future<void> fetchEngagements(String agentId) async {
+    // TODO: Implementation
+    throw UnimplementedError();
+  }
+
+  double calculateAverageEngagement() {
+    // TODO: Implementation
+    throw UnimplementedError();
+  }
 }
 ```
 
 ## Step 2: Write Failing Test (RED)
 
-```typescript
-// lib/liquidity.test.ts
-import { calculateLiquidityScore } from './liquidity'
+```dart
+// test/src/features/analytics/widget_engagement_controller_test.dart
+import 'package:core/services/mindset_sevice_provider.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
+import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
 
-describe('calculateLiquidityScore', () => {
-  it('should return high score for liquid market', () => {
-    const market = {
-      totalVolume: 100000,
-      bidAskSpread: 0.01,
-      activeTraders: 500,
-      lastTradeTime: new Date()
-    }
+@GenerateMocks([EngagementRepository])
+void main() {
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    MindsetServiceProvider.enableTestMode();
+  });
 
-    const score = calculateLiquidityScore(market)
+  late WidgetEngagementController controller;
+  late MockEngagementRepository mockRepository;
 
-    expect(score).toBeGreaterThan(80)
-    expect(score).toBeLessThanOrEqual(100)
-  })
+  setUp(() {
+    mockRepository = MockEngagementRepository();
+    Get.put<EngagementRepository>(mockRepository);
+    controller = WidgetEngagementController(mockRepository);
+  });
 
-  it('should return low score for illiquid market', () => {
-    const market = {
-      totalVolume: 100,
-      bidAskSpread: 0.5,
-      activeTraders: 2,
-      lastTradeTime: new Date(Date.now() - 86400000) // 1 day ago
-    }
+  tearDown(() {
+    Get.reset();
+  });
 
-    const score = calculateLiquidityScore(market)
+  group('WidgetEngagement', () {
+    test('calculates high engagement score for active widget', () {
+      final engagement = WidgetEngagement(
+        widgetId: 'widget-123',
+        viewCount: 100,
+        interactionCount: 75,
+        timeSpent: const Duration(minutes: 5),
+      );
 
-    expect(score).toBeLessThan(30)
-    expect(score).toBeGreaterThanOrEqual(0)
-  })
+      final score = engagement.engagementScore;
 
-  it('should handle edge case: zero volume', () => {
-    const market = {
-      totalVolume: 0,
-      bidAskSpread: 0,
-      activeTraders: 0,
-      lastTradeTime: new Date()
-    }
+      expect(score, greaterThan(0.7));
+      expect(score, lessThanOrEqualTo(1.0));
+    });
 
-    const score = calculateLiquidityScore(market)
+    test('calculates low engagement score for inactive widget', () {
+      final engagement = WidgetEngagement(
+        widgetId: 'widget-456',
+        viewCount: 100,
+        interactionCount: 5,
+        timeSpent: const Duration(seconds: 10),
+      );
 
-    expect(score).toBe(0)
-  })
-})
+      final score = engagement.engagementScore;
+
+      expect(score, lessThan(0.3));
+      expect(score, greaterThanOrEqualTo(0.0));
+    });
+
+    test('returns zero engagement score when no views', () {
+      final engagement = WidgetEngagement(
+        widgetId: 'widget-789',
+        viewCount: 0,
+        interactionCount: 0,
+        timeSpent: Duration.zero,
+      );
+
+      final score = engagement.engagementScore;
+
+      expect(score, equals(0.0));
+    });
+  });
+
+  group('WidgetEngagementController', () {
+    test('fetchEngagements updates engagements list on success', () async {
+      final testEngagements = [
+        WidgetEngagement(
+          widgetId: 'widget-1',
+          viewCount: 50,
+          interactionCount: 30,
+          timeSpent: const Duration(minutes: 2),
+        ),
+      ];
+      when(mockRepository.getEngagements(any))
+          .thenAnswer((_) async => testEngagements);
+
+      await controller.fetchEngagements('agent-123');
+
+      expect(controller.engagements, equals(testEngagements));
+      expect(controller.isLoading.value, false);
+      expect(controller.error.value, isNull);
+      verify(mockRepository.getEngagements('agent-123')).called(1);
+    });
+
+    test('fetchEngagements sets error on failure', () async {
+      when(mockRepository.getEngagements(any))
+          .thenThrow(Exception('Network error'));
+
+      await controller.fetchEngagements('agent-123');
+
+      expect(controller.engagements, isEmpty);
+      expect(controller.isLoading.value, false);
+      expect(controller.error.value, contains('Network error'));
+    });
+
+    test('calculateAverageEngagement returns correct average', () {
+      controller.engagements.value = [
+        WidgetEngagement(
+          widgetId: 'w1',
+          viewCount: 100,
+          interactionCount: 80,
+          timeSpent: const Duration(minutes: 5),
+        ),
+        WidgetEngagement(
+          widgetId: 'w2',
+          viewCount: 100,
+          interactionCount: 20,
+          timeSpent: const Duration(minutes: 1),
+        ),
+      ];
+
+      final average = controller.calculateAverageEngagement();
+
+      expect(average, closeTo(0.5, 0.1));
+    });
+  });
+}
 ```
 
 ## Step 3: Run Tests - Verify FAIL
 
 ```bash
-npm test lib/liquidity.test.ts
+cd mindset_v2
+melos run test
 
-FAIL lib/liquidity.test.ts
-  ✕ should return high score for liquid market (2 ms)
-    Error: Not implemented
+FAIL test/src/features/analytics/widget_engagement_controller_test.dart
+  x calculates high engagement score for active widget (2 ms)
+    UnimplementedError
 
-1 test failed, 0 passed
+3 tests failed, 0 passed
 ```
 
-✅ Tests fail as expected. Ready to implement.
+Tests fail as expected. Ready to implement.
 
 ## Step 4: Implement Minimal Code (GREEN)
 
-```typescript
-// lib/liquidity.ts
-export function calculateLiquidityScore(market: MarketData): number {
-  // Handle zero volume edge case
-  if (market.totalVolume === 0) {
-    return 0
+```dart
+// lib/src/features/analytics/widget_engagement_controller.dart
+class WidgetEngagement {
+  final String widgetId;
+  final int viewCount;
+  final int interactionCount;
+  final Duration timeSpent;
+
+  WidgetEngagement({
+    required this.widgetId,
+    required this.viewCount,
+    required this.interactionCount,
+    required this.timeSpent,
+  });
+
+  double get engagementScore {
+    if (viewCount == 0) return 0.0;
+
+    // Interaction rate (0-1)
+    final interactionRate = interactionCount / viewCount;
+
+    // Time engagement (normalized to 5 minutes = 1.0)
+    final timeScore = (timeSpent.inSeconds / 300).clamp(0.0, 1.0);
+
+    // Weighted average
+    return (interactionRate * 0.6 + timeScore * 0.4).clamp(0.0, 1.0);
+  }
+}
+
+class WidgetEngagementController extends GetxController {
+  final EngagementRepository _repository;
+  final RxList<WidgetEngagement> engagements = <WidgetEngagement>[].obs;
+  final RxBool isLoading = false.obs;
+  final Rx<String?> error = Rx<String?>(null);
+
+  WidgetEngagementController(this._repository);
+
+  Future<void> fetchEngagements(String agentId) async {
+    isLoading.value = true;
+    error.value = null;
+
+    try {
+      engagements.value = await _repository.getEngagements(agentId);
+    } catch (e) {
+      error.value = e.toString();
+      engagements.clear();
+    } finally {
+      isLoading.value = false;
+    }
   }
 
-  // Calculate component scores (0-100 scale)
-  const volumeScore = Math.min(market.totalVolume / 1000, 100)
-  const spreadScore = Math.max(100 - (market.bidAskSpread * 1000), 0)
-  const traderScore = Math.min(market.activeTraders / 10, 100)
-
-  // Recent activity bonus
-  const hoursSinceLastTrade = (Date.now() - market.lastTradeTime.getTime()) / (1000 * 60 * 60)
-  const recencyScore = Math.max(100 - (hoursSinceLastTrade * 10), 0)
-
-  // Weighted average
-  const score = (
-    volumeScore * 0.4 +
-    spreadScore * 0.3 +
-    traderScore * 0.2 +
-    recencyScore * 0.1
-  )
-
-  return Math.min(Math.max(score, 0), 100) // Clamp to 0-100
+  double calculateAverageEngagement() {
+    if (engagements.isEmpty) return 0.0;
+    final total = engagements.fold<double>(
+      0.0,
+      (sum, e) => sum + e.engagementScore,
+    );
+    return total / engagements.length;
+  }
 }
 ```
 
 ## Step 5: Run Tests - Verify PASS
 
 ```bash
-npm test lib/liquidity.test.ts
+cd mindset_v2
+melos run test
 
-PASS lib/liquidity.test.ts
-  ✓ should return high score for liquid market (3 ms)
-  ✓ should return low score for illiquid market (2 ms)
-  ✓ should handle edge case: zero volume (1 ms)
+PASS test/src/features/analytics/widget_engagement_controller_test.dart
+  + calculates high engagement score for active widget (3 ms)
+  + calculates low engagement score for inactive widget (2 ms)
+  + returns zero engagement score when no views (1 ms)
+  + fetchEngagements updates engagements list on success (5 ms)
+  + fetchEngagements sets error on failure (3 ms)
+  + calculateAverageEngagement returns correct average (2 ms)
 
-3 tests passed
+6 tests passed
 ```
 
-✅ All tests passing!
+All tests passing!
 
-## Step 6: Refactor (IMPROVE)
-
-```typescript
-// lib/liquidity.ts - Refactored with constants and better readability
-const WEIGHTS = {
-  VOLUME: 0.4,
-  SPREAD: 0.3,
-  TRADERS: 0.2,
-  RECENCY: 0.1,
-} as const
-
-const SCALE_FACTORS = {
-  VOLUME: 1000,
-  SPREAD: 1000,
-  TRADERS: 10,
-  RECENCY_PENALTY: 10,
-} as const
-
-function clamp(value: number, min: number, max: number): number {
-  return Math.min(Math.max(value, min), max)
-}
-
-export function calculateLiquidityScore(market: MarketData): number {
-  if (market.totalVolume === 0) return 0
-
-  const volumeScore = Math.min(market.totalVolume / SCALE_FACTORS.VOLUME, 100)
-  const spreadScore = clamp(100 - (market.bidAskSpread * SCALE_FACTORS.SPREAD), 0, 100)
-  const traderScore = Math.min(market.activeTraders / SCALE_FACTORS.TRADERS, 100)
-
-  const hoursSinceLastTrade = (Date.now() - market.lastTradeTime.getTime()) / (1000 * 60 * 60)
-  const recencyScore = clamp(100 - (hoursSinceLastTrade * SCALE_FACTORS.RECENCY_PENALTY), 0, 100)
-
-  const weightedScore =
-    volumeScore * WEIGHTS.VOLUME +
-    spreadScore * WEIGHTS.SPREAD +
-    traderScore * WEIGHTS.TRADERS +
-    recencyScore * WEIGHTS.RECENCY
-
-  return clamp(weightedScore, 0, 100)
-}
-```
-
-## Step 7: Verify Tests Still Pass
+## Step 6: Check Coverage
 
 ```bash
-npm test lib/liquidity.test.ts
+cd mindset_v2
+melos run test -- --coverage
 
-PASS lib/liquidity.test.ts
-  ✓ should return high score for liquid market (3 ms)
-  ✓ should return low score for illiquid market (2 ms)
-  ✓ should handle edge case: zero volume (1 ms)
+File                              | % Stmts | % Branch | % Funcs | % Lines
+----------------------------------|---------|----------|---------|--------
+widget_engagement_controller.dart |   100   |   100    |   100   |   100
 
-3 tests passed
+Coverage: 100% (Target: 80%)
 ```
 
-✅ Refactoring complete, tests still passing!
+TDD session complete!
+```
 
-## Step 8: Check Coverage
+---
+
+## Example: Python LangGraph Node (AI Agent Context Processing)
+
+```
+User: /tdd I need a LangGraph node to process agent context and determine response strategy
+
+Agent (tdd-guide):
+# TDD Session: Context Strategy Node
+
+## Step 1: Define Interface (SCAFFOLD)
+
+```python
+# nodes/context_strategy.py
+from dataclasses import dataclass
+from enum import Enum
+from typing import List, Optional
+
+class ResponseStrategy(Enum):
+    DIRECT_ANSWER = "direct_answer"
+    RAG_RETRIEVAL = "rag_retrieval"
+    CLARIFICATION = "clarification"
+    ESCALATION = "escalation"
+
+@dataclass
+class ContextInput:
+    user_query: str
+    conversation_history: List[dict]
+    available_knowledge_bases: List[str]
+    confidence_threshold: float = 0.7
+
+@dataclass
+class StrategyOutput:
+    strategy: ResponseStrategy
+    confidence: float
+    reasoning: str
+    selected_knowledge_bases: Optional[List[str]] = None
+
+def determine_response_strategy(context: ContextInput) -> StrategyOutput:
+    """Analyze context and determine optimal response strategy."""
+    # TODO: Implementation
+    raise NotImplementedError()
+```
+
+## Step 2: Write Failing Test (RED)
+
+```python
+# test_context_strategy.py
+import pytest
+from nodes.context_strategy import (
+    ContextInput,
+    StrategyOutput,
+    ResponseStrategy,
+    determine_response_strategy,
+)
+
+class TestDetermineResponseStrategy:
+    """Tests for context strategy determination."""
+
+    def test_returns_direct_answer_for_simple_greeting(self):
+        """Simple greetings should get direct answers."""
+        context = ContextInput(
+            user_query="Hello!",
+            conversation_history=[],
+            available_knowledge_bases=["general_kb"],
+        )
+
+        result = determine_response_strategy(context)
+
+        assert result.strategy == ResponseStrategy.DIRECT_ANSWER
+        assert result.confidence > 0.8
+
+    def test_returns_rag_retrieval_for_knowledge_query(self):
+        """Knowledge-seeking queries should trigger RAG retrieval."""
+        context = ContextInput(
+            user_query="What are the key features of the premium widget?",
+            conversation_history=[],
+            available_knowledge_bases=["product_kb", "features_kb"],
+        )
+
+        result = determine_response_strategy(context)
+
+        assert result.strategy == ResponseStrategy.RAG_RETRIEVAL
+        assert result.selected_knowledge_bases is not None
+        assert len(result.selected_knowledge_bases) > 0
+
+    def test_returns_clarification_for_ambiguous_query(self):
+        """Ambiguous queries should request clarification."""
+        context = ContextInput(
+            user_query="How do I do that?",
+            conversation_history=[],
+            available_knowledge_bases=["general_kb"],
+        )
+
+        result = determine_response_strategy(context)
+
+        assert result.strategy == ResponseStrategy.CLARIFICATION
+        assert "ambiguous" in result.reasoning.lower() or "unclear" in result.reasoning.lower()
+
+    def test_returns_escalation_when_no_knowledge_bases_available(self):
+        """Should escalate when no relevant knowledge is available."""
+        context = ContextInput(
+            user_query="What is the company's financial forecast for Q4?",
+            conversation_history=[],
+            available_knowledge_bases=[],  # No knowledge bases
+        )
+
+        result = determine_response_strategy(context)
+
+        assert result.strategy == ResponseStrategy.ESCALATION
+
+    def test_uses_conversation_history_for_context(self):
+        """Should consider conversation history for follow-up questions."""
+        context = ContextInput(
+            user_query="What about the pricing?",
+            conversation_history=[
+                {"role": "user", "content": "Tell me about the enterprise plan"},
+                {"role": "assistant", "content": "The enterprise plan includes..."},
+            ],
+            available_knowledge_bases=["pricing_kb"],
+        )
+
+        result = determine_response_strategy(context)
+
+        assert result.strategy == ResponseStrategy.RAG_RETRIEVAL
+        assert "pricing_kb" in result.selected_knowledge_bases
+
+    def test_handles_empty_query_gracefully(self):
+        """Empty query should request clarification."""
+        context = ContextInput(
+            user_query="",
+            conversation_history=[],
+            available_knowledge_bases=["general_kb"],
+        )
+
+        result = determine_response_strategy(context)
+
+        assert result.strategy == ResponseStrategy.CLARIFICATION
+
+
+class TestContextInputValidation:
+    """Tests for input validation."""
+
+    def test_accepts_valid_confidence_threshold(self):
+        """Should accept threshold between 0 and 1."""
+        context = ContextInput(
+            user_query="Test",
+            conversation_history=[],
+            available_knowledge_bases=[],
+            confidence_threshold=0.5,
+        )
+        assert context.confidence_threshold == 0.5
+
+    def test_default_confidence_threshold(self):
+        """Default threshold should be 0.7."""
+        context = ContextInput(
+            user_query="Test",
+            conversation_history=[],
+            available_knowledge_bases=[],
+        )
+        assert context.confidence_threshold == 0.7
+```
+
+## Step 3: Run Tests - Verify FAIL
 
 ```bash
-npm test -- --coverage lib/liquidity.test.ts
+cd pythonia/cloud-functions/monkee.ai_CR_aiagent_v3
+pytest test_context_strategy.py -v
 
-File           | % Stmts | % Branch | % Funcs | % Lines
----------------|---------|----------|---------|--------
-liquidity.ts   |   100   |   100    |   100   |   100
+FAILED test_context_strategy.py::TestDetermineResponseStrategy::test_returns_direct_answer_for_simple_greeting
+    NotImplementedError
 
-Coverage: 100% ✅ (Target: 80%)
+6 failed, 2 passed
 ```
 
-✅ TDD session complete!
+Tests fail as expected. Ready to implement.
+
+## Step 4: Implement Minimal Code (GREEN)
+
+```python
+# nodes/context_strategy.py
+import re
+from dataclasses import dataclass
+from enum import Enum
+from typing import List, Optional
+
+class ResponseStrategy(Enum):
+    DIRECT_ANSWER = "direct_answer"
+    RAG_RETRIEVAL = "rag_retrieval"
+    CLARIFICATION = "clarification"
+    ESCALATION = "escalation"
+
+@dataclass
+class ContextInput:
+    user_query: str
+    conversation_history: List[dict]
+    available_knowledge_bases: List[str]
+    confidence_threshold: float = 0.7
+
+@dataclass
+class StrategyOutput:
+    strategy: ResponseStrategy
+    confidence: float
+    reasoning: str
+    selected_knowledge_bases: Optional[List[str]] = None
+
+# Simple patterns for strategy determination
+GREETING_PATTERNS = [
+    r"^(hello|hi|hey|good morning|good afternoon|good evening)[\s!.]*$",
+]
+AMBIGUOUS_PATTERNS = [
+    r"^(how|what|why|where|when).*\b(that|this|it)\b.*\?*$",
+]
+
+def determine_response_strategy(context: ContextInput) -> StrategyOutput:
+    """Analyze context and determine optimal response strategy."""
+    query = context.user_query.strip().lower()
+
+    # Handle empty query
+    if not query:
+        return StrategyOutput(
+            strategy=ResponseStrategy.CLARIFICATION,
+            confidence=1.0,
+            reasoning="Empty query requires clarification",
+        )
+
+    # Check for simple greetings
+    for pattern in GREETING_PATTERNS:
+        if re.match(pattern, query, re.IGNORECASE):
+            return StrategyOutput(
+                strategy=ResponseStrategy.DIRECT_ANSWER,
+                confidence=0.95,
+                reasoning="Simple greeting detected",
+            )
+
+    # Check for ambiguous queries (no context)
+    if not context.conversation_history:
+        for pattern in AMBIGUOUS_PATTERNS:
+            if re.match(pattern, query, re.IGNORECASE):
+                return StrategyOutput(
+                    strategy=ResponseStrategy.CLARIFICATION,
+                    confidence=0.8,
+                    reasoning="Ambiguous query without conversation context",
+                )
+
+    # Check if knowledge bases are available
+    if not context.available_knowledge_bases:
+        return StrategyOutput(
+            strategy=ResponseStrategy.ESCALATION,
+            confidence=0.9,
+            reasoning="No knowledge bases available to answer query",
+        )
+
+    # Default to RAG retrieval with knowledge base selection
+    selected_kbs = _select_relevant_knowledge_bases(
+        query, context.available_knowledge_bases, context.conversation_history
+    )
+
+    return StrategyOutput(
+        strategy=ResponseStrategy.RAG_RETRIEVAL,
+        confidence=0.85,
+        reasoning="Knowledge query requiring RAG retrieval",
+        selected_knowledge_bases=selected_kbs,
+    )
+
+def _select_relevant_knowledge_bases(
+    query: str,
+    available_kbs: List[str],
+    history: List[dict],
+) -> List[str]:
+    """Select relevant knowledge bases based on query and history."""
+    selected = []
+
+    # Simple keyword matching for demo
+    keywords_to_kb = {
+        "pricing": "pricing_kb",
+        "price": "pricing_kb",
+        "cost": "pricing_kb",
+        "feature": "features_kb",
+        "product": "product_kb",
+    }
+
+    # Check query
+    query_lower = query.lower()
+    for keyword, kb in keywords_to_kb.items():
+        if keyword in query_lower and kb in available_kbs:
+            selected.append(kb)
+
+    # Check history for context
+    history_text = " ".join(
+        msg.get("content", "") for msg in history
+    ).lower()
+    for keyword, kb in keywords_to_kb.items():
+        if keyword in history_text and kb in available_kbs and kb not in selected:
+            selected.append(kb)
+
+    # Default to first available if nothing matched
+    if not selected and available_kbs:
+        selected.append(available_kbs[0])
+
+    return selected
 ```
+
+## Step 5: Run Tests - Verify PASS
+
+```bash
+cd pythonia/cloud-functions/monkee.ai_CR_aiagent_v3
+pytest test_context_strategy.py -v
+
+PASSED test_context_strategy.py::TestDetermineResponseStrategy::test_returns_direct_answer_for_simple_greeting
+PASSED test_context_strategy.py::TestDetermineResponseStrategy::test_returns_rag_retrieval_for_knowledge_query
+PASSED test_context_strategy.py::TestDetermineResponseStrategy::test_returns_clarification_for_ambiguous_query
+PASSED test_context_strategy.py::TestDetermineResponseStrategy::test_returns_escalation_when_no_knowledge_bases_available
+PASSED test_context_strategy.py::TestDetermineResponseStrategy::test_uses_conversation_history_for_context
+PASSED test_context_strategy.py::TestDetermineResponseStrategy::test_handles_empty_query_gracefully
+PASSED test_context_strategy.py::TestContextInputValidation::test_accepts_valid_confidence_threshold
+PASSED test_context_strategy.py::TestContextInputValidation::test_default_confidence_threshold
+
+8 passed
+```
+
+All tests passing!
+
+## Step 6: Check Coverage
+
+```bash
+pytest --cov=nodes.context_strategy --cov-report=term-missing
+
+Name                        Stmts   Miss  Cover
+-----------------------------------------------
+nodes/context_strategy.py      45      0   100%
+
+Coverage: 100% (Target: 80%)
+```
+
+TDD session complete!
+```
+
+---
 
 ## TDD Best Practices
 
 **DO:**
-- ✅ Write the test FIRST, before any implementation
-- ✅ Run tests and verify they FAIL before implementing
-- ✅ Write minimal code to make tests pass
-- ✅ Refactor only after tests are green
-- ✅ Add edge cases and error scenarios
-- ✅ Aim for 80%+ coverage (100% for critical code)
+- Write the test FIRST, before any implementation
+- Run tests and verify they FAIL before implementing
+- Write minimal code to make tests pass
+- Refactor only after tests are green
+- Add edge cases and error scenarios
+- Aim for 80%+ coverage (100% for critical code)
 
 **DON'T:**
-- ❌ Write implementation before tests
-- ❌ Skip running tests after each change
-- ❌ Write too much code at once
-- ❌ Ignore failing tests
-- ❌ Test implementation details (test behavior)
-- ❌ Mock everything (prefer integration tests)
+- Write implementation before tests
+- Skip running tests after each change
+- Write too much code at once
+- Ignore failing tests
+- Test implementation details (test behavior)
+- Mock everything (prefer integration tests where sensible)
 
 ## Test Types to Include
 
@@ -280,24 +713,64 @@ Coverage: 100% ✅ (Target: 80%)
 - Boundary values
 
 **Integration Tests** (Component-level):
-- API endpoints
-- Database operations
-- External service calls
-- React components with hooks
+- gRPC endpoints
+- Firestore operations
+- LangGraph node chains
+- GetX controller + repository interactions
 
-**E2E Tests** (use `/e2e` command):
-- Critical user flows
-- Multi-step processes
-- Full stack integration
+**Widget Tests** (Flutter UI):
+- Component rendering
+- User interactions
+- State changes
+- Golden tests for visual regression
 
 ## Coverage Requirements
 
 - **80% minimum** for all code
 - **100% required** for:
-  - Financial calculations
-  - Authentication logic
-  - Security-critical code
-  - Core business logic
+  - AI agent decision logic
+  - Widget configuration parsing
+  - Authentication/authorization logic
+  - Financial or billing calculations
+
+## Test Commands
+
+### Flutter (mindset_v2)
+```bash
+cd mindset_v2
+
+# Run all tests
+melos run test
+
+# Run tests for specific package
+cd packages/core && flutter test
+
+# Run with coverage
+melos run test -- --coverage
+
+# Run single test file
+flutter test test/path/to/test_file_test.dart
+```
+
+### Python (pythonia)
+```bash
+cd pythonia/cloud-functions/<function-name>
+
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run with coverage
+pytest --cov=. --cov-report=term-missing
+
+# Run specific test file
+pytest test_main.py
+
+# Run tests matching pattern
+pytest -k "test_strategy"
+```
 
 ## Important Notes
 
@@ -317,10 +790,8 @@ Never skip the RED phase. Never write code before tests.
 - Use `/code-review` to review implementation
 - Use `/test-coverage` to verify coverage
 
-## Related Agents
+## Related Resources
 
-This command invokes the `tdd-guide` agent located at:
-`~/.claude/agents/tdd-guide.md`
-
-And can reference the `tdd-workflow` skill at:
-`~/.claude/skills/tdd-workflow/`
+- **Testing Skill**: `blueprints/.claude/skills/testing/SKILL.md`
+- **tdd-guide Agent**: `~/.claude/agents/tdd-guide.md`
+- **tdd-workflow Skill**: `blueprints/.claude/skills/tdd-workflow/`

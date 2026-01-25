@@ -2,7 +2,7 @@
 
 ## Available Agents
 
-Located in `~/.claude/agents/`:
+Located in `blueprints-claude-code/agents/`:
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
