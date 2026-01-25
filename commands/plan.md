@@ -9,7 +9,7 @@ This command invokes the **planner** agent to create a comprehensive implementat
 ## What This Command Does
 
 1. **Restate Requirements** - Clarify what needs to be built
-2. **Read Feature Context** - Load context from `blueprints/features/[feature-name]/context.md`
+2. **Read Feature Context** - Load context from `blueprints/pods/[pod-name]/features/[feature-name]/context.md`
 3. **Identify Risks** - Surface potential issues and blockers
 4. **Create Step Plan** - Break down implementation into phases
 5. **Update Context** - Add the plan to the feature's "What's Next" section
@@ -20,7 +20,7 @@ This command invokes the **planner** agent to create a comprehensive implementat
 Plans are stored within the feature's blueprints structure:
 
 ```
-blueprints/features/[feature-name]/
+blueprints/pods/[pod-name]/features/[feature-name]/
 ├── FEATURE.md      # Overall feature context and status
 ├── context.md      # Living document - plans go in "What's Next" section
 ├── CLAUDE.md       # Key decisions, gotchas, and technical guidance
@@ -74,7 +74,7 @@ Agent (planner):
 # Implementation Plan: Knowledge Base Search Tool for AI Agent
 
 ## Feature Context
-Reading from: blueprints/features/feat-widget-mcp/context.md
+Reading from: blueprints/pods/wip/features/feat-widget-mcp/context.md
 - Related work: Widget creator MCP already implements tool patterns
 - Key decision: Tools use gRPC for communication (see CLAUDE.md)
 
@@ -139,7 +139,7 @@ Reading from: blueprints/features/feat-widget-mcp/context.md
 **WAITING FOR CONFIRMATION**: Proceed with this plan? (yes/no/modify)
 
 Once confirmed, I will update:
-- blueprints/features/feat-widget-mcp/context.md "What's Next" section
+- blueprints/pods/wip/features/feat-widget-mcp/context.md "What's Next" section
 ```
 
 ## Important Notes

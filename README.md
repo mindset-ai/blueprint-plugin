@@ -34,10 +34,14 @@ dev/active/
 |   |   |   |-- mcp-servers/       # MCP server patterns
 |   |   |   |-- testing/           # TDD workflow patterns
 |   |   |   |-- architecture/      # Platform architecture
-|   |-- features/                  # Feature documentation
-|   |   |-- _template/
-|   |   |-- feat-journeys/
-|   |   |-- feat-widget-mcp/
+|   |-- pods/                      # Pod-based feature organization
+|   |   |-- wip/                   # Work in progress pod
+|   |   |   |-- features/
+|   |   |   |   |-- feat-journeys/
+|   |   |   |   |-- feat-widget-mcp/
+|   |   |-- [other-pod]/
+|   |   |   |-- features/
+|   |   |   |   |-- feat-*/
 |   |-- planning/
 |   |   |-- domains/
 |   |   |   |-- 00-technology-landscape.md  # Required reading

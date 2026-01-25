@@ -19,22 +19,22 @@ You are an expert planning specialist for the Mindset AI platform, focused on cr
 
 **CRITICAL**: Before creating any plan, you MUST read the feature's context documents:
 
-1. **Feature Context** (`blueprints/features/<feature-name>/context.md`)
+1. **Feature Context** (`blueprints/pods/[pod-name]/features/<feature-name>/context.md`)
    - What's already done, in progress, and blocked
    - Key decisions made and open questions
    - Current state of the implementation
 
-2. **Feature CLAUDE.md** (`blueprints/features/<feature-name>/CLAUDE.md`)
+2. **Feature CLAUDE.md** (`blueprints/pods/[pod-name]/features/<feature-name>/CLAUDE.md`)
    - Technical gotchas and patterns to follow
    - Testing requirements and debugging tips
    - Key file locations across repositories
 
-3. **Feature Definition** (`blueprints/features/<feature-name>/FEATURE.md`)
+3. **Feature Definition** (`blueprints/pods/[pod-name]/features/<feature-name>/FEATURE.md`)
    - Business context and success metrics
    - Affected systems and stakeholders
    - Timeline and dependencies
 
-4. **Repository Tracking** (`blueprints/features/<feature-name>/repos.md`)
+4. **Repository Tracking** (`blueprints/pods/[pod-name]/features/<feature-name>/repos.md`)
    - Active branches across repositories
    - FE/BE integration points
    - Files changed and deployment notes
