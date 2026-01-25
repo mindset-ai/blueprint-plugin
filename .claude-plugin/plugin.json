@@ -1,12 +1,9 @@
 {
-  "name": "everything-claude-code",
-  "description": "Complete collection of battle-tested Claude Code configs from an Anthropic hackathon winner - agents, skills, hooks, commands, and rules evolved over 10+ months of intensive daily use",
+  "name": "blueprints-claude-code",
+  "description": "Claude Code configurations for Mindset AI blueprints development",
   "author": {
-    "name": "Affaan Mustafa",
-    "url": "https://x.com/affaanmustafa"
+    "name": "Mindset AI"
   },
-  "homepage": "https://github.com/affaan-m/everything-claude-code",
-  "repository": "https://github.com/affaan-m/everything-claude-code",
   "license": "MIT",
   "keywords": [
     "claude-code",
