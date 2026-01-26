@@ -268,6 +268,23 @@ Skills are workflow definitions that live in the blueprints repository:
 
 Skills provide domain-specific patterns and best practices for each technology in the Mindset stack. They are referenced by commands and agents when reviewing or writing code.
 
+### /plan vs /ms-start-story
+
+The `/plan` command in this repository is a **general-purpose planning command**, while `/ms-start-story` in mindset_v2 is a **workflow automation command** specific to that project:
+
+| Aspect | `/ms-start-story` (mindset_v2) | `/plan` (this repo) |
+|--------|--------------------------------|---------------------|
+| **Scope** | mindset_v2 only | Any project |
+| **Git ops** | Creates branch from develop | None |
+| **Ticket integration** | GitLab via glab | None |
+| **Security** | Classification required (Standard/Security-Aware/Security-Critical) | Risk assessment only |
+| **Artifacts** | `llm/` folder structure | `blueprints/` context.md |
+| **Best for** | Starting a new GitLab-tracked story | Planning any feature/task |
+
+**When to use which:**
+- Use `/ms-start-story` when working on a GitLab-tracked mindset_v2 story that needs branch creation, requirements docs, and security classification
+- Use `/plan` for general planning across any project, or when you don't need the GitLab/branch automation
+
 ### Hooks
 
 Hooks fire on tool events. Example - warn about debug statements in Flutter:
