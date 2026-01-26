@@ -268,22 +268,135 @@ Skills are workflow definitions that live in the blueprints repository:
 
 Skills provide domain-specific patterns and best practices for each technology in the Mindset stack. They are referenced by commands and agents when reviewing or writing code.
 
-### /plan vs /ms-start-story
+### Command Comparison: blueprints-claude-code vs mindset_v2
 
-The `/plan` command in this repository is a **general-purpose planning command**, while `/ms-start-story` in mindset_v2 is a **workflow automation command** specific to that project:
+The mindset_v2 project has its own `/ms-*` commands that provide GitLab integration and security workflows specific to that project. This section clarifies which commands to use and when.
 
-| Aspect | `/ms-start-story` (mindset_v2) | `/plan` (this repo) |
-|--------|--------------------------------|---------------------|
-| **Scope** | mindset_v2 only | Any project |
-| **Git ops** | Creates branch from develop | None |
-| **Ticket integration** | GitLab via glab | None |
-| **Security** | Classification required (Standard/Security-Aware/Security-Critical) | Risk assessment only |
-| **Artifacts** | `llm/` folder structure | `blueprints/` context.md |
-| **Best for** | Starting a new GitLab-tracked story | Planning any feature/task |
+#### Planning Commands
 
-**When to use which:**
-- Use `/ms-start-story` when working on a GitLab-tracked mindset_v2 story that needs branch creation, requirements docs, and security classification
-- Use `/plan` for general planning across any project, or when you don't need the GitLab/branch automation
+| Aspect | `/plan` (this repo) | `/ms-story-plan` (mindset_v2) |
+|--------|---------------------|-------------------------------|
+| **Scope** | Any project | mindset_v2 only |
+| **Git ops** | None | Creates branch from develop |
+| **Ticket integration** | None | GitLab via glab (fetches issue details) |
+| **Security** | Risk assessment only | **Required** classification (Standard/Security-Aware/Security-Critical) |
+| **Artifacts** | Updates `blueprints/` context.md | Creates `llm/{story}/` folder with requirements + plan |
+| **Best for** | General feature planning | Starting a GitLab-tracked story |
+
+**Usage:**
+```bash
+# General planning (any project)
+/plan I need to add a new tool to the AI agent
+
+# mindset_v2 story (with GitLab automation)
+/ms-story-plan gitlab-issue-url="https://gitlab.com/.../issues/1234"
+
+# mindset_v2 story (plan only, requirements exist)
+/ms-story-plan story-number=1234 requirements-doc-path-or-reference="llm/1234/1234-requirements.md"
+```
+
+#### TDD Commands
+
+| Aspect | `/tdd` (this repo) | `/ms-tdd-fix` (mindset_v2) |
+|--------|--------------------|-----------------------------|
+| **Scope** | Any project (Flutter, Python, React) | mindset_v2 only |
+| **Focus** | Full TDD workflow (new features + bugs) | Bug fixes only |
+| **Coverage** | Enforces 80%+ coverage | Regression test focus |
+| **Examples** | Includes Flutter GetX and Python LangGraph examples | Flutter/Dart patterns |
+| **Best for** | New feature development with TDD | Quick bug fix with test |
+
+**Usage:**
+```bash
+# Full TDD for new feature (any project)
+/tdd I need a controller to track widget engagement metrics
+
+# Bug fix with regression test (mindset_v2)
+/ms-tdd-fix bug-description="Button doesn't disable when form is invalid"
+```
+
+#### Code Review Commands
+
+| Aspect | `/code-review` (this repo) | `/ms-security-review` (mindset_v2) |
+|--------|----------------------------|------------------------------------|
+| **Scope** | Any project | mindset_v2 only |
+| **Focus** | Quality, security, platform patterns | Pre-deployment security verification |
+| **When** | After writing code | Before MR (Security-Aware/Critical only) |
+| **Checks** | GetX, LangGraph, React patterns, gRPC compat | Security controls, Secret Manager, vulnerability scan |
+| **Best for** | General code quality review | Security gate before deployment |
+
+**Usage:**
+```bash
+# General code review (any project)
+/code-review
+
+# Security verification before MR (mindset_v2, Security-Aware/Critical)
+/ms-security-review story-number=653 classification="Security-Aware"
+```
+
+#### mindset_v2-Only Commands (No Equivalent in This Repo)
+
+These commands are specific to mindset_v2's GitLab workflow and security classification system:
+
+| Command | Purpose | When to Use |
+|---------|---------|-------------|
+| `/ms-classify-story` | Determine security classification | Optional - before planning (auto-done by `/ms-story-plan`) |
+| `/ms-implement-secure` | Implement with security practices | During development, after plan approval |
+| `/ms-security-critical-checklist` | Create security checklist | Security-Critical stories only (5%), after CTO approval |
+| `/ms-create-mr` | Create GitLab merge request | After development complete, creates MR with glab |
+
+**Usage:**
+```bash
+# Classify a story (optional - ms-story-plan does this automatically)
+/ms-classify-story story-number=653 gitlab-issue-url="..."
+
+# Implement with security practices
+/ms-implement-secure story-number=653 classification="Security-Aware"
+
+# Create security checklist (Security-Critical only)
+/ms-security-critical-checklist story-number=655
+
+# Create merge request
+/ms-create-mr story-number=653
+```
+
+#### Decision Guide: Which Command to Use?
+
+```
+Are you working on mindset_v2 with a GitLab issue?
+├─ YES → Use /ms-* commands
+│   ├─ Starting new story? → /ms-story-plan
+│   ├─ Implementing? → /ms-implement-secure
+│   ├─ Fixing a bug? → /ms-tdd-fix
+│   ├─ Security review needed? → /ms-security-review
+│   └─ Ready for MR? → /ms-create-mr
+│
+└─ NO → Use blueprints-claude-code commands
+    ├─ Planning a feature? → /plan
+    ├─ Writing new code with TDD? → /tdd
+    ├─ Reviewing code? → /code-review
+    ├─ Build errors? → /build-fix
+    └─ E2E tests needed? → /e2e
+```
+
+#### Typical Workflows
+
+**mindset_v2 Story (Full Workflow):**
+```bash
+/ms-story-plan gitlab-issue-url="https://gitlab.com/.../issues/653"
+# Review requirements and plan, approve when ready
+/ms-implement-secure story-number=653 classification="Security-Aware"
+/ms-security-review story-number=653 classification="Security-Aware"
+/ms-create-mr story-number=653
+```
+
+**General Feature (Any Project):**
+```bash
+/plan I need to add knowledge base search to the AI agent
+# Review plan, approve when ready
+/tdd  # Implement with TDD
+/code-review  # Review before commit
+/build-fix  # If build errors occur
+```
 
 ### Hooks
 
