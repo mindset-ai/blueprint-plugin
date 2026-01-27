@@ -27,11 +27,18 @@ Add to your `~/.claude/settings.json`:
 
 ## Commands
 
+### Feature Context (Start Here)
+
+| Command | What it does |
+|---------|--------------|
+| `/load-feature` | **Start of session.** Load feature context and skills. Reads FEAT.md, TRACKING.md, context.md, latest handoff, and declared skills. |
+| `/update-feature` | **During/end of session.** Update feature docs with progress, new blockers, decisions made. |
+| `/new-feature` | Create new feature folder with FEAT.md and TRACKING.md from templates. |
+
 ### Planning & Development
 
 | Command | What it does |
 |---------|--------------|
-| `/new-feature` | Create new feature folder with FEAT.md and TRACKING.md from templates. |
 | `/plan` | Create implementation plan. Reads feature context, breaks down into phases, waits for approval before coding. |
 | `/tdd` | Test-driven development. Write failing tests first, implement minimal code to pass, refactor. Enforces 80%+ coverage. |
 | `/build-fix` | Fix build errors. Detects project type (Flutter/Python/React), runs build, fixes errors iteratively. |
@@ -75,16 +82,23 @@ Add to your `~/.claude/settings.json`:
 How to use these commands together:
 
 ```
-0. SETUP      →  /new-feature       Create feature folder from templates
+0. CONTEXT    →  /load-feature      Load feature context and skills (START HERE)
 1. PLAN       →  /plan              Create implementation plan, get approval
 2. IMPLEMENT  →  /tdd               Write tests first, then code
 3. BUILD      →  /build-fix         Fix any build/type errors
 4. REVIEW     →  /code-review       Check quality and security
 5. VERIFY     →  /verify            Run full test suite
-6. HANDOFF    →  /checkpoint        Save context for next session
+6. UPDATE     →  /update-feature    Sync docs with progress, decisions, blockers
+7. HANDOFF    →  /checkpoint        Save context for next session
 ```
 
 ### Typical Flow
+
+**Starting a session (existing feature):**
+```
+/load-feature feat-widget-mcp
+```
+Claude reads all feature docs, latest handoff, and declared skills. You're ready to work.
 
 **Creating a new feature:**
 ```
@@ -118,9 +132,10 @@ Claude detects project type, runs build, fixes errors iteratively until green.
 
 **End of session:**
 ```
-/checkpoint
+/update-feature feat-widget-mcp
+/checkpoint feat-widget-mcp
 ```
-Claude saves current state to blueprints for seamless handoff.
+Claude updates feature docs with progress, then creates handoff for next session.
 
 ---
 
@@ -191,16 +206,28 @@ Always-follow guidelines loaded into every session:
 
 ## Feature Structure (Blueprints)
 
-Features in the blueprints repo use 2 files:
+Features in the blueprints repo use this structure:
 
 ```
 blueprints/pods/{pod}/features/{feature}/
-├── FEAT.md         # THE living document - status, blockers, patterns, local dev
+├── FEAT.md         # THE living document - status, blockers, patterns, skills, local dev
 ├── TRACKING.md     # Cross-repo branches, deployment order, files changed
+├── context.md      # Current state, session log
+├── CLAUDE.md       # Feature-specific instructions
+├── handoffs/       # Session summaries
 └── archive/        # Historical docs
 ```
 
-`/plan` reads FEAT.md and TRACKING.md, then updates "What's Next" with the approved plan.
+**Skills Declaration** in FEAT.md:
+```markdown
+## Skills
+<!-- Loaded automatically by /load-feature -->
+- python
+- grpc
+- react
+```
+
+`/load-feature` reads all docs and declared skills. `/plan` creates implementation plans. `/update-feature` syncs docs with progress.
 
 ---
 
