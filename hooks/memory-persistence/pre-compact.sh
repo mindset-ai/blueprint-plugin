@@ -11,7 +11,7 @@
 #       "matcher": "*",
 #       "hooks": [{
 #         "type": "command",
-#         "command": "blueprints-claude-code/hooks/memory-persistence/pre-compact.sh"
+#         "command": "blueprints-cc-plugin/hooks/memory-persistence/pre-compact.sh"
 #       }]
 #     }]
 #   }

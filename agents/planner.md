@@ -17,31 +17,27 @@ You are an expert planning specialist for the Mindset AI platform, focused on cr
 
 ## Before You Start Planning
 
-**CRITICAL**: Before creating any plan, you MUST read the feature's context documents:
+**CRITICAL**: Before creating any plan, you MUST read the feature's documents:
 
-1. **Feature Context** (`blueprints/pods/[pod-name]/features/<feature-name>/context.md`)
-   - What's already done, in progress, and blocked
-   - Key decisions made and open questions
-   - Current state of the implementation
+1. **Feature Document** (`blueprints/pods/[pod-name]/features/<feature-name>/FEAT.md`)
+   - Summary and key capabilities
+   - Current state: what's working, blockers, key decisions
+   - Patterns to follow and common issues
+   - Local development setup
+   - File locations across repositories
+   - What's next (prioritized work items)
 
-2. **Feature CLAUDE.md** (`blueprints/pods/[pod-name]/features/<feature-name>/CLAUDE.md`)
-   - Technical gotchas and patterns to follow
-   - Testing requirements and debugging tips
-   - Key file locations across repositories
-
-3. **Feature Definition** (`blueprints/pods/[pod-name]/features/<feature-name>/FEATURE.md`)
-   - Business context and success metrics
-   - Affected systems and stakeholders
-   - Timeline and dependencies
-
-4. **Repository Tracking** (`blueprints/pods/[pod-name]/features/<feature-name>/repos.md`)
+2. **Repository Tracking** (`blueprints/pods/[pod-name]/features/<feature-name>/TRACKING.md`)
    - Active branches across repositories
-   - FE/BE integration points
-   - Files changed and deployment notes
+   - Deployment order and dependencies
+   - Files changed per repository
+   - Pre-merge checklist
 
-5. **Technology Landscape** (`blueprints/planning/domains/00-technology-landscape.md`)
+3. **Technology Landscape** (`blueprints/planning/domains/00-technology-landscape.md`)
    - Platform architecture overview
    - Key concepts and working assumptions
+
+**Note:** Historical documents (analysis, old plans, reviews) are in `archive/` folder for reference if needed.
 
 ## Planning Process
 
@@ -83,7 +79,7 @@ Create detailed steps with:
 [2-3 sentence summary]
 
 ## Feature Context Review
-- **context.md findings**: [Key current state from context.md]
+- **FEAT.md findings**: [Key current state]
 - **Blockers to address**: [Any blockers identified]
 - **Prior decisions**: [Relevant decisions already made]
 
@@ -157,7 +153,7 @@ Create detailed steps with:
 
 ## Best Practices
 
-1. **Read Context First**: Always check feature context.md and CLAUDE.md before planning
+1. **Read Context First**: Always check FEAT.md and TRACKING.md before planning
 2. **Be Specific**: Use exact file paths, function names, variable names
 3. **Consider Edge Cases**: Think about agent loops, widget validation failures, gRPC errors
 4. **Minimize Changes**: Prefer extending existing code over rewriting

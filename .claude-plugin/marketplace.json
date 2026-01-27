@@ -1,5 +1,5 @@
 {
-  "name": "blueprints-claude-code",
+  "name": "blueprints-cc-plugin",
   "owner": {
     "name": "Mindset AI"
   },
@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "blueprints-claude-code",
+      "name": "blueprints-cc-plugin",
       "source": "./",
       "description": "Agents, skills, hooks, commands, and rules for Mindset AI development",
       "author": {

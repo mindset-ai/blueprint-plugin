@@ -53,6 +53,22 @@ New or improved MCP server configs:
 - Monitoring tools
 - Communication tools
 
+
+## Updates and Upgrades
+
+When making modifications to existing agents, skills, commands, hooks, rules, or MCP configurations, please note:
+
+- **Breaking Changes**: If your update changes the interface, parameters, or expected behavior of an existing component, increment the version number and document the changes clearly.
+
+- **Upgrade Path**: Include migration instructions for users who need to update their existing configurations. This should explain:
+  - What changed
+  - How to update existing configs
+  - Any new dependencies or requirements
+
+- **Backward Compatibility**: When possible, maintain backward compatibility. If breaking changes are necessary, provide a clear upgrade path and deprecation timeline.
+
+- **Notification**: Major updates should include a note in the PR description about who might be affected and how they can upgrade their configurations.
+
 ---
 
 ## How to Contribute

@@ -15,7 +15,7 @@
 #       "matcher": "Edit|Write",
 #       "hooks": [{
 #         "type": "command",
-#         "command": "blueprints-claude-code/hooks/strategic-compact/suggest-compact.sh"
+#         "command": "blueprints-cc-plugin/hooks/strategic-compact/suggest-compact.sh"
 #       }]
 #     }]
 #   }
