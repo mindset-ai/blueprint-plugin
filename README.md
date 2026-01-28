@@ -18,7 +18,9 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 
 ## Quick Start
 
-Add to your `~/.claude/settings.json`:
+**New here?** See the full [QUICKSTART.md](QUICKSTART.md) guide for step-by-step setup.
+
+**Already have the repos cloned?** Add to your `~/.claude/settings.json`:
 
 ```json
 {
@@ -245,33 +247,9 @@ blueprints/pods/{pod}/features/{feature}/
 
 ---
 
-## Installation Options
+## Installation
 
-### Plugin (Recommended)
-
-```json
-{
-  "enabledPlugins": {
-    "mindset-claude-code@blueprints-cc-plugin": true
-  },
-  "extraKnownMarketplaces": {
-    "mindset-claude-code": {
-      "source": {
-        "source": "directory",
-        "path": "/path/to/blueprints-cc-plugin"
-      }
-    }
-  }
-}
-```
-
-### Manual
-
-```bash
-cp blueprints-cc-plugin/agents/*.md ~/.claude/agents/
-cp blueprints-cc-plugin/rules/*.md ~/.claude/rules/
-cp blueprints-cc-plugin/commands/*.md ~/.claude/commands/
-```
+See the [QUICKSTART.md](QUICKSTART.md#getting-started) guide for step-by-step installation instructions for VS Code and CLI.
 
 ---
 
