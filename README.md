@@ -1,5 +1,15 @@
 # blueprints-cc-plugin
 
+## A Developer Force-Multiplier System
+
+> **One Developer + Claude Code + Blueprints = Full-Stack Development Team**
+
+This plugin transforms Claude Code from a coding assistant into an **intelligent development orchestrator**. It enables each developer to effectively manage a team of AI-driven specialists — planners, architects, testers, reviewers, and implementers — working in harmony across your entire platform stack.
+
+**The result:** Every developer becomes a full-stack developer, capable of shipping features across Flutter, Python, React, and gRPC with the velocity of an entire team.
+
+---
+
 **Claude Code plugin for the Mindset AI platform.**
 
 Commands, agents, and rules to accelerate development across Flutter, Python, and React codebases.
