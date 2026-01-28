@@ -32,6 +32,7 @@ Add to your `~/.claude/settings.json`:
 | Command | What it does |
 |---------|--------------|
 | `/load-feature` | **Start of session.** Load feature context and skills. Reads FEAT.md, TRACKING.md, context.md, latest handoff, and declared skills. |
+| `/load-skill` | Load skills without a feature. Supports aliases (e.g., `dart` → `flutter`, `proto` → `grpc`). |
 | `/update-feature` | **During/end of session.** Update feature docs with progress, new blockers, decisions made. |
 | `/new-feature` | Create new feature folder with FEAT.md and TRACKING.md from templates. |
 

@@ -35,21 +35,33 @@ function getSessionsDir() {
 }
 
 /**
+ * Find the blueprints directory by walking up the directory tree
+ * Returns null if not found
+ */
+function findBlueprintsDir() {
+  let dir = process.cwd();
+  const root = path.parse(dir).root;
+
+  while (dir !== root) {
+    const candidate = path.join(dir, "blueprints", ".claude", "skills");
+    if (fs.existsSync(candidate)) {
+      return path.join(dir, "blueprints");
+    }
+    dir = path.dirname(dir);
+  }
+
+  return null;
+}
+
+/**
  * Get the learned skills directory
- * Checks for project-level blueprints/.claude/skills/learned first,
+ * Walks up directory tree to find blueprints/.claude/skills/learned,
  * then falls back to user-level ~/.claude/skills/learned
  */
 function getLearnedSkillsDir() {
-  // Check for project-level skills directory first
-  const projectDir = path.join(
-    process.cwd(),
-    "blueprints",
-    ".claude",
-    "skills",
-    "learned",
-  );
-  if (fs.existsSync(path.dirname(path.dirname(projectDir)))) {
-    return projectDir;
+  const blueprintsDir = findBlueprintsDir();
+  if (blueprintsDir) {
+    return path.join(blueprintsDir, ".claude", "skills", "learned");
   }
   // Fall back to user-level directory
   return path.join(getClaudeDir(), "skills", "learned");
@@ -367,6 +379,7 @@ module.exports = {
   getHomeDir,
   getClaudeDir,
   getSessionsDir,
+  findBlueprintsDir,
   getLearnedSkillsDir,
   getTempDir,
   ensureDir,

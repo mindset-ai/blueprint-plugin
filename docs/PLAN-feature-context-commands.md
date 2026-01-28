@@ -73,7 +73,7 @@ Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
 | `react` | React SDK v3 development | ~3,350 |
 | `grpc` | Protocol Buffers, Buf CLI | ~2,900 |
 | `firebase` | Firestore, auth, security rules | ~4,600 |
-| `mcp-servers` | MCP server development | ~4,150 |
+| `mcp` | MCP server development | ~4,150 |
 | `testing` | TDD workflow, test patterns | ~5,000 |
 | `architecture` | System design, cross-repo | ~4,050 |
 
@@ -109,7 +109,7 @@ In Progress - Phase 1 complete, Phase 2 planning
 2. Plan Phase 2 journey orchestration
 
 ## Skills Loaded
-- python, grpc, react, mcp-servers
+- python, grpc, react, mcp
 
 Ready to work on feat-journeys.
 ```
@@ -165,7 +165,7 @@ Added Skills section after Key Capabilities:
 ## Skills
 
 <!-- Loaded automatically by /load-feature. See blueprints/.claude/skills/ for available skills. -->
-<!-- Available: python, flutter, react, grpc, firebase, mcp-servers, testing, architecture -->
+<!-- Available: python, flutter, react, grpc, firebase, mcp, testing, architecture -->
 
 - {skill-1}
 - {skill-2}
@@ -185,7 +185,7 @@ Added Skills sections to:
 - python
 - grpc
 - react
-- mcp-servers
+- mcp
 ```
 
 ### feat-widget-mcp
@@ -193,7 +193,7 @@ Added Skills sections to:
 ## Skills
 - python
 - react
-- mcp-servers
+- mcp
 - testing
 ```
 
@@ -271,7 +271,7 @@ To verify implementation:
    /load-feature feat-journeys
    ```
    - Should read 4+ feature files
-   - Should parse and read 4 skill files (python, grpc, react, mcp-servers)
+   - Should parse and read 4 skill files (python, grpc, react, mcp)
    - Should output summary with status, blockers, last session, skills
 
 2. **Test `/update-feature`:**

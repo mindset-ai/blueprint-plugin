@@ -55,7 +55,7 @@ Available skills are located at `blueprints/.claude/skills/{skill}/SKILL.md`:
 - `react` - React SDK v3 development
 - `grpc` - Protocol Buffers, Buf CLI, service patterns
 - `firebase` - Firestore, authentication, security rules
-- `mcp-servers` - MCP server development and integration
+- `mcp` - MCP server development and integration
 - `testing` - TDD workflow, test patterns
 - `architecture` - System design, cross-repo patterns
 
