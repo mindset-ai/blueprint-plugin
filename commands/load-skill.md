@@ -32,6 +32,11 @@ The command supports common aliases that map to the canonical skill names:
 | `sdk`, `sdk3`, `sdk-v3` | `react` | React SDK v3 |
 | `mcp-servers`, `mcp-server`, `tools` | `mcp` | MCP server development |
 | `design`, `system-design` | `architecture` | System architecture |
+| `deploy`, `cloud-run`, `cr` | `deployment` | Cloud Run deployment |
+| `sf`, `data-warehouse`, `dwh` | `snowflake` | Snowflake database |
+| `workflow`, `commands` | `blueprints` | Blueprints workflow system |
+| `copywriting`, `copy`, `content`, `writing`, `voice` | `brand` | Brand voice and copywriting |
+| `design-system`, `components`, `theming` | `ui` | UI patterns and design system |
 
 ## Available Skills
 
@@ -47,6 +52,11 @@ Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
 | `mcp` | MCP server development and integration |
 | `testing` | TDD workflow, test patterns |
 | `architecture` | System design, cross-repo patterns |
+| `deployment` | Cloud Run deployment for MCP servers |
+| `snowflake` | Snowflake database setup and best practices |
+| `blueprints` | Blueprints workflow, skills, and commands |
+| `brand` | Brand voice, copywriting, and terminology |
+| `ui` | UI patterns and design system (load with brand) |
 
 ## What This Command Does
 
@@ -148,6 +158,32 @@ const SKILL_ALIASES = {
   // Architecture
   'design': 'architecture',
   'system-design': 'architecture',
+
+  // Deployment
+  'deploy': 'deployment',
+  'cloud-run': 'deployment',
+  'cr': 'deployment',
+
+  // Snowflake
+  'sf': 'snowflake',
+  'data-warehouse': 'snowflake',
+  'dwh': 'snowflake',
+
+  // Blueprints
+  'workflow': 'blueprints',
+  'commands': 'blueprints',
+
+  // Brand
+  'copywriting': 'brand',
+  'copy': 'brand',
+  'content': 'brand',
+  'writing': 'brand',
+  'voice': 'brand',
+
+  // UI
+  'design-system': 'ui',
+  'components': 'ui',
+  'theming': 'ui',
 };
 ```
 
