@@ -17,7 +17,10 @@ Add to your `~/.claude/settings.json`:
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
-      "source": { "source": "local", "path": "/path/to/blueprints-cc-plugin" }
+      "source": {
+        "source": "directory",
+        "path": "/path/to/blueprints-cc-plugin"
+      }
     }
   }
 }
@@ -243,7 +246,10 @@ blueprints/pods/{pod}/features/{feature}/
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
-      "source": { "source": "local", "path": "/path/to/blueprints-cc-plugin" }
+      "source": {
+        "source": "directory",
+        "path": "/path/to/blueprints-cc-plugin"
+      }
     }
   }
 }
