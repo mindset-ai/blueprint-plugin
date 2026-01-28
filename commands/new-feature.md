@@ -70,7 +70,7 @@ Created: blueprints/pods/{pod}/features/{feature-name}/
 
 Next steps:
 1. Edit FEAT.md to add your feature summary and capabilities
-2. Run /plan {feature-name}: {description} to create implementation plan
+2. Run /plan-feature {feature-name}: {description} to create implementation plan
 ```
 
 ## Template Locations
@@ -81,5 +81,5 @@ Next steps:
 ## Notes
 
 - Feature names should use kebab-case with `feat-` prefix (e.g., `feat-widget-export`)
-- The command creates minimal structure - flesh out FEAT.md before running `/plan`
+- The command creates minimal structure - flesh out FEAT.md before running `/plan-feature`
 - Archive folder starts empty - move old docs here as feature progresses

@@ -143,7 +143,7 @@ Typical session flow:
 ```
 /load-feature feat-journeys    # Start: load context
 [... do work ...]
-/plan                          # If starting new work item
+/plan-feature                  # If starting new work item
 /tdd                           # Implement with tests
 /code-review                   # Review changes
 /checkpoint feat-journeys      # End: save session state

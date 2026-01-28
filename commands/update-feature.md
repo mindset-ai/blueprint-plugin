@@ -179,7 +179,7 @@ Proceed with these updates? (yes/no/modify)
 
 ```
 /load-feature feat-journeys    # Read context
-/plan                          # Plan work (updates What's Next)
+/plan-feature                  # Plan work (updates What's Next)
 /tdd                           # Implement
 /update-feature feat-journeys  # Sync docs with progress
 /checkpoint feat-journeys      # Create handoff

@@ -10,7 +10,7 @@
 
 When developers open a fresh Claude Code session, they need a simple way to get full context for the feature they're working on. The previous approach considered pre-loading/injecting data, but this caused concerns about:
 
-1. **Token duplication** - If `/context` pre-loads skills, and `/plan` also loads skills, same content appears twice
+1. **Token duplication** - If `/context` pre-loads skills, and `/plan-feature` also loads skills, same content appears twice
 2. **No deduplication mechanism** - Claude Code has no way to check "is this already loaded?"
 3. **Eager vs lazy loading** - Pre-injecting everything wastes tokens if not all content is needed
 
@@ -18,7 +18,7 @@ When developers open a fresh Claude Code session, they need a simple way to get 
 
 ## Solution: Instruction-Based Commands
 
-After analyzing existing commands (`/plan`, `/tdd`, `/checkpoint`), we discovered they are **instruction documents**, not data loaders. They tell Claude what to do, and Claude uses the Read tool to fetch content. This approach:
+After analyzing existing commands (`/plan-feature`, `/tdd`, `/checkpoint`), we discovered they are **instruction documents**, not data loaders. They tell Claude what to do, and Claude uses the Read tool to fetch content. This approach:
 
 - **Lazy loads** - Only reads files when needed
 - **No duplication** - Tool results are in conversation history; Claude can see what was already read
@@ -204,7 +204,7 @@ Added Skills sections to:
 ```
 /load-feature feat-journeys    # 1. Start: load context + skills
 [... do work ...]
-/plan                          # 2. Plan new work (if needed)
+/plan-feature                  # 2. Plan new work (if needed)
 /tdd                           # 3. Implement with tests
 /code-review                   # 4. Review changes
 /update-feature feat-journeys  # 5. Sync docs with progress

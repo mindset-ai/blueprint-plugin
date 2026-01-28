@@ -55,7 +55,7 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 
 | Command | What it does |
 |---------|--------------|
-| `/plan` | Create implementation plan. Reads feature context, breaks down into phases, waits for approval before coding. |
+| `/plan-feature` | Create implementation plan. Reads feature context, breaks down into phases, waits for approval before coding. |
 | `/tdd` | Test-driven development. Write failing tests first, implement minimal code to pass, refactor. Enforces 80%+ coverage. |
 | `/build-fix` | Fix build errors. Detects project type (Flutter/Python/React), runs build, fixes errors iteratively. |
 | `/code-review` | Review uncommitted changes. Checks security, patterns (GetX, LangGraph, React), gRPC compatibility. Blocks on critical issues. |
@@ -99,7 +99,7 @@ How to use these commands together:
 
 ```
 0. CONTEXT    →  /load-feature      Load feature context and skills (START HERE)
-1. PLAN       →  /plan              Create implementation plan, get approval
+1. PLAN       →  /plan-feature       Create implementation plan, get approval
 2. IMPLEMENT  →  /tdd               Write tests first, then code
 3. BUILD      →  /build-fix         Fix any build/type errors
 4. REVIEW     →  /code-review       Check quality and security
@@ -124,7 +124,7 @@ Claude creates the folder structure with FEAT.md and TRACKING.md from templates.
 
 **Planning work:**
 ```
-/plan feat-widget-mcp: add retry logic to failed requests
+/plan-feature feat-widget-mcp: add retry logic to failed requests
 ```
 Claude reads FEAT.md + TRACKING.md, creates phased plan, waits for your approval.
 
@@ -197,7 +197,7 @@ Working on mindset_v2 with a GitLab issue?
 │   └─ Ready for MR? → /ms-create-mr
 │
 └─ NO → Use plugin commands
-    ├─ Planning? → /plan
+    ├─ Planning? → /plan-feature
     ├─ New code? → /tdd
     ├─ Review? → /code-review
     └─ Build errors? → /build-fix
@@ -243,7 +243,7 @@ blueprints/pods/{pod}/features/{feature}/
 - react
 ```
 
-`/load-feature` reads all docs and declared skills. `/plan` creates implementation plans. `/update-feature` syncs docs with progress.
+`/load-feature` reads all docs and declared skills. `/plan-feature` creates implementation plans. `/update-feature` syncs docs with progress.
 
 ---
 

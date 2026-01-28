@@ -19,7 +19,7 @@ Think of it as **the team's shared brain** — everything anyone needs to know a
 
 This is the **Claude Code plugin** that makes the knowledge base useful:
 
-- **Commands** — Slash commands like `/load-feature`, `/plan`, `/checkpoint` that automate common workflows
+- **Commands** — Slash commands like `/load-feature`, `/plan-feature`, `/checkpoint` that automate common workflows
 - **Agents** — Specialized AI sub-agents for planning, code review, testing, security analysis
 - **Rules** — Guidelines that Claude always follows (security, testing, code style, git workflow)
 
@@ -65,7 +65,7 @@ blueprints/
 
 ```
 blueprints-cc-plugin/
-├── commands/             # Slash commands (/load-feature, /plan, /tdd, etc.)
+├── commands/             # Slash commands (/load-feature, /plan-feature, /tdd, etc.)
 ├── agents/               # Specialized sub-agents (planner, reviewer, etc.)
 ├── rules/                # Always-on guidelines (security, testing, git)
 ├── contexts/             # Work modes (dev, research, review)
@@ -149,6 +149,6 @@ Once installed, the key commands are:
 | Command | Purpose |
 |---------|---------|
 | `/load-feature {name}` | Start a session — loads all context for a feature |
-| `/plan` | Create an implementation plan before coding |
+| `/plan-feature` | Create an implementation plan before coding |
 | `/tdd` | Write tests first, then implement |
 | `/checkpoint` | End a session — save handoff for next time |

@@ -2,7 +2,7 @@
 description: Restate requirements, assess risks, and create step-by-step implementation plan. WAIT for user CONFIRM before touching any code.
 ---
 
-# Plan Command
+# Plan Feature Command
 
 This command invokes the **planner** agent to create a comprehensive implementation plan before writing any code.
 
@@ -52,9 +52,9 @@ blueprints/pods/[pod-name]/features/[feature-name]/
 
 ### Determining the Pod
 
-When `/plan` is invoked:
+When `/plan-feature` is invoked:
 
-1. **If feature specified** (e.g., `/plan feat-journeys: add X`):
+1. **If feature specified** (e.g., `/plan-feature feat-journeys: add X`):
    - Find the feature at `blueprints/pods/*/features/feat-journeys/`
    - Use that pod location
 
@@ -151,7 +151,7 @@ Update these sections with the planned changes:
 
 ## When to Use
 
-Use `/plan` when:
+Use `/plan-feature` when:
 - Starting a new feature or epic
 - Adding capabilities to AI agents
 - Creating new widget types or components
@@ -179,7 +179,7 @@ The planner agent will:
 ## Example Usage
 
 ```
-User: /plan I need to add a new tool to the AI agent that allows it to search knowledge bases
+User: /plan-feature I need to add a new tool to the AI agent that allows it to search knowledge bases
 
 Agent (planner):
 # Implementation Plan: Knowledge Base Search Tool
@@ -237,8 +237,8 @@ If you want changes to the plan, respond with:
 You can specify which feature the plan relates to:
 
 ```
-/plan feat-widget-mcp: Add export capability for generated widgets
-/plan feat-journeys: Implement conditional branching in journey steps
+/plan-feature feat-widget-mcp: Add export capability for generated widgets
+/plan-feature feat-journeys: Implement conditional branching in journey steps
 ```
 
 If no feature is specified, the planner will ask which feature context to use or help create a new one.
