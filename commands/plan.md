@@ -6,40 +6,148 @@ description: Restate requirements, assess risks, and create step-by-step impleme
 
 This command invokes the **planner** agent to create a comprehensive implementation plan before writing any code.
 
+## ⚠️ Critical: Planning Only - No Implementation
+
+**This command is for PLANNING ONLY.** The planner agent will:
+- Research the codebase
+- Analyze requirements
+- Create a detailed plan
+- Write the plan to FEAT.md and TRACKING.md
+
+**The planner will NOT write any code.** All implementation must be done:
+1. In a **new session** (see end of this document)
+2. Using **specialized sub-agents** (tdd-guide, build-error-resolver, code-reviewer, etc.)
+
 ## What This Command Does
 
-1. **Restate Requirements** - Clarify what needs to be built
-2. **Read Feature Context** - Load context from `blueprints/pods/[pod-name]/features/[feature-name]/FEAT.md`
-3. **Identify Risks** - Surface potential issues and blockers
-4. **Create Step Plan** - Break down implementation into phases
-5. **Update Feature** - Add the plan to the feature's "What's Next" section
-6. **Wait for Confirmation** - MUST receive user approval before proceeding
+1. **Determine Feature Location** - Identify or create the pod/feature structure
+2. **Load Required Skills** - Read skill files declared in FEAT.md
+3. **Restate Requirements** - Clarify what needs to be built
+4. **Read Feature Context** - Load context from FEAT.md and TRACKING.md
+5. **Identify Risks** - Surface potential issues and blockers
+6. **Create Step Plan** - Break down implementation into phases
+7. **Write to Feature Files** - Update FEAT.md and TRACKING.md with the plan
+8. **Wait for Confirmation** - MUST receive user approval before writing
+9. **Instruct New Session** - Tell user to start fresh session for implementation
 
-## Integration with Mindset Blueprints
+## Feature Location: Pods and Structure
 
-Features use a simplified 2-file structure:
+All plans are written to the blueprints pod/feature structure:
 
 ```
 blueprints/pods/[pod-name]/features/[feature-name]/
-├── FEAT.md         # THE living document - everything in one place
+├── FEAT.md         # THE living document - plan goes in "What's Next" section
 ├── TRACKING.md     # Cross-repo branches, deployment order, files changed
 └── archive/        # Historical docs (analysis, old plans, reviews)
 ```
 
-When creating a plan:
+### Available Pods
 
-1. **Read FEAT.md** to understand:
-   - Current state: what's working, blockers, decisions
-   - Patterns to follow and common issues
-   - File locations across repositories
-   - Existing "What's Next" items
+| Pod | Purpose |
+|-----|---------|
+| `wip` | Work-in-progress, active development, experimental |
+| `ps1` | Product sprint 1 |
+| `ps2` | Product sprint 2 |
+| `platform` | Infrastructure, cross-cutting concerns |
 
-2. **Check TRACKING.md** for:
-   - Active branches per repository
-   - Deployment order and dependencies
-   - Files already changed
+### Determining the Pod
 
-3. **Update the "What's Next" section** in `FEAT.md` with the approved plan
+When `/plan` is invoked:
+
+1. **If feature specified** (e.g., `/plan feat-journeys: add X`):
+   - Find the feature at `blueprints/pods/*/features/feat-journeys/`
+   - Use that pod location
+
+2. **If new feature needed**:
+   - Ask the user which pod this belongs to
+   - Create the feature folder using the template structure
+   - Then proceed with planning
+
+3. **If unclear**:
+   - Ask: "Which pod should this feature belong to? (wip/ps1/ps2/platform)"
+
+## Loading Skills Before Planning
+
+Before creating any plan, the planner MUST load relevant skills:
+
+1. **If feature exists** - Parse the `## Skills` section from FEAT.md:
+   ```markdown
+   ## Skills
+   - python
+   - grpc
+   - flutter
+   ```
+   Read each skill from `blueprints/.claude/skills/{skill}/SKILL.md`
+
+2. **If new feature** - Ask user which skills are relevant, or infer from request:
+   - Python backend work → load `python`, `grpc`
+   - Flutter UI work → load `flutter`, `firebase`
+   - React SDK work → load `react`
+   - MCP server work → load `mcp`, `python`
+
+3. **Always load `architecture`** - For cross-repo understanding
+
+Available skills: `python`, `flutter`, `react`, `grpc`, `firebase`, `mcp`, `testing`, `architecture`
+
+## Where the Plan Gets Written
+
+**IMPORTANT**: Plans are NOT written to separate files. They go directly into the feature documents:
+
+### FEAT.md - The "What's Next" Section
+
+The implementation plan is added to the "What's Next" section with:
+- Prioritized phases
+- Specific steps with file paths
+- Dependencies and risks
+- Estimated complexity
+
+```markdown
+## What's Next
+
+### Prioritized
+
+1. **Phase 1: Proto Definitions** (protos/)
+   - Prerequisites: None
+   - Steps:
+     - Define KnowledgeSearchRequest in `protos/ai/v1/agent.proto`
+     - Run `buf lint` and `buf generate`
+   - Risk: Low
+
+2. **Phase 2: Python Backend** (pythonia/)
+   - Prerequisites: Phase 1 complete
+   - Steps:
+     - Create `cloud-functions/.../tools/knowledge_search.py`
+     - Add unit tests
+   - Risk: Medium
+```
+
+### TRACKING.md - Branches and Files
+
+Update these sections with the planned changes:
+
+```markdown
+## Branches
+
+| Repository | Branch | Base | Status | PR |
+|------------|--------|------|--------|-----|
+| protos | `feature/knowledge-search` | `main` | Planned | - |
+| pythonia | `feature/knowledge-search` | `main` | Planned | - |
+
+## Files Changed
+
+### protos
+**Added:**
+- `ai/v1/knowledge_search.proto` - Search request/response types
+
+### pythonia
+**Added:**
+- `cloud-functions/.../tools/knowledge_search.py` - Search tool implementation
+
+## Deployment Order
+
+1. **protos** - Proto definitions must be published first
+2. **pythonia** - Backend implementation depends on protos
+```
 
 ## When to Use
 
@@ -55,14 +163,18 @@ Use `/plan` when:
 
 The planner agent will:
 
-1. **Analyze the request** and restate requirements in clear terms
-2. **Read feature context** from blueprints if a feature is specified
-3. **Break down into phases** with specific, actionable steps
-4. **Identify dependencies** between components (Python backend, Flutter frontend, protos)
-5. **Assess risks** and potential blockers
-6. **Estimate complexity** (High/Medium/Low)
-7. **Present the plan** and WAIT for your explicit confirmation
-8. **Update context.md** with the approved plan in "What's Next" section
+1. **Determine feature location** - Find existing or create new pod/feature
+2. **Load skills** - Read skill files for domain knowledge
+3. **Analyze the request** and restate requirements in clear terms
+4. **Read feature context** from FEAT.md and TRACKING.md
+5. **Break down into phases** with specific, actionable steps
+6. **Identify dependencies** between components (Python backend, Flutter frontend, protos)
+7. **Assess risks** and potential blockers
+8. **Estimate complexity** (High/Medium/Low)
+9. **Present the plan** and WAIT for your explicit confirmation
+10. **Write to FEAT.md** - Update "What's Next" section with the approved plan
+11. **Write to TRACKING.md** - Update branches, files, deployment order
+12. **Instruct new session** - Tell user to start fresh for implementation
 
 ## Example Usage
 
@@ -70,87 +182,52 @@ The planner agent will:
 User: /plan I need to add a new tool to the AI agent that allows it to search knowledge bases
 
 Agent (planner):
-# Implementation Plan: Knowledge Base Search Tool for AI Agent
+# Implementation Plan: Knowledge Base Search Tool
 
-## Feature Context
-Reading from: blueprints/pods/wip/features/feat-widget-mcp/FEAT.md
-- Related work: Widget creator MCP already implements tool patterns
-- Key decision: Tools use gRPC for communication
+## Feature Location
+This appears to be new functionality. Which pod should this belong to?
+- wip (work-in-progress)
+- ps1 (product sprint 1)
+- ps2 (product sprint 2)
+- platform (infrastructure)
+
+User: wip
+
+Agent (planner):
+Creating feature at: blueprints/pods/wip/features/feat-knowledge-search/
+
+## Skills Loaded
+- python (LangGraph, cloud functions)
+- grpc (Protocol Buffers, service patterns)
+- architecture (cross-repo patterns)
 
 ## Requirements Restatement
-- Add a new tool to the AI agent that searches knowledge bases
-- Tool should accept search queries and return relevant content chunks
-- Support filtering by knowledge base ID and content type
-- Integrate with existing LangGraph tool execution flow
+[... detailed requirements ...]
 
 ## Implementation Phases
+[... detailed phases ...]
 
-### Phase 1: Proto Definitions (protos/)
-- Define KnowledgeSearchRequest message with query, kb_id, filters
-- Define KnowledgeSearchResponse with results array and metadata
-- Add search method to AIAgent service definition
-- Run `buf lint` and `buf generate` to update generated code
+## Risks & Dependencies
+[... risk assessment ...]
 
-### Phase 2: Python Backend (pythonia/)
-- Create knowledge_search_tool.py in cloud-functions/monkee.ai_CR_aiagent_v3/tools/
-- Implement FirestoreKnowledgeSearcher class
-- Add vector similarity search using existing embeddings
-- Register tool in LangGraph agent configuration
-- Add unit tests for search logic
+---
 
-### Phase 3: Integration
-- Update agent tool registry to include knowledge search
-- Add tool configuration in agent settings (Firestore)
-- Implement rate limiting and quota checks
-- Add telemetry/logging for tool usage
+**WAITING FOR CONFIRMATION**: Approve this plan? (yes/no/modify)
 
-### Phase 4: Testing & Documentation
-- Add integration tests with test knowledge base
-- Update sdk2-docs with tool documentation
-- Test via AMS admin interface
-
-## Dependencies
-- Existing embedding service (already deployed)
-- Firestore vector search indexes
-- LangGraph tool execution framework
-
-## Risks
-- HIGH: Vector search performance with large knowledge bases
-- MEDIUM: Embedding model compatibility between indexing and search
-- MEDIUM: Rate limiting to prevent abuse
-- LOW: Proto breaking changes affecting existing clients
-
-## Cross-Repo Impact
-| Repo | Changes Required |
-|------|------------------|
-| protos | New message types and service method |
-| pythonia | New tool implementation |
-| mindset_v2 | None (uses existing gRPC client) |
-| sdk2-docs | Documentation updates |
-
-## Estimated Complexity: MEDIUM
-- Proto definitions: 1-2 hours
-- Backend implementation: 4-6 hours
-- Integration: 2-3 hours
-- Testing: 2-3 hours
-- Total: 9-14 hours
-
-**WAITING FOR CONFIRMATION**: Proceed with this plan? (yes/no/modify)
-
-Once confirmed, I will update:
-- blueprints/pods/wip/features/feat-widget-mcp/context.md "What's Next" section
+Once approved, I will:
+1. Write the plan to `blueprints/pods/wip/features/feat-knowledge-search/FEAT.md`
+2. Update `TRACKING.md` with branches and file changes
+3. You should then START A NEW SESSION to implement
 ```
 
 ## Important Notes
 
-**CRITICAL**: The planner agent will **NOT** write any code until you explicitly confirm the plan with "yes" or "proceed" or similar affirmative response.
+**CRITICAL**: The planner agent will **NOT** write any code. It only:
+- Researches the codebase
+- Creates the plan
+- Writes to FEAT.md and TRACKING.md
 
-**Plans are stored in FEAT.md**: After confirmation, the plan will be added to the feature's `FEAT.md` file in the "What's Next" section. This ensures:
-- Persistence across Claude sessions
-- Visibility for other team members
-- Single source of truth for the feature
-
-If you want changes, respond with:
+If you want changes to the plan, respond with:
 - "modify: [your changes]"
 - "different approach: [alternative]"
 - "skip phase 2 and do phase 3 first"
@@ -164,17 +241,58 @@ You can specify which feature the plan relates to:
 /plan feat-journeys: Implement conditional branching in journey steps
 ```
 
-If no feature is specified, the planner will ask which feature context to use or create a standalone plan.
+If no feature is specified, the planner will ask which feature context to use or help create a new one.
 
-## Integration with Other Commands
+## ⚠️ CRITICAL: Start a New Session for Implementation
 
-After planning:
-- Use `/tdd` to implement with test-driven development
-- Use `/build-and-fix` if build errors occur
-- Use `/code-review` to review completed implementation
-- Update `FEAT.md` as items are completed
+After the plan is approved and written to FEAT.md/TRACKING.md:
+
+**DO NOT continue implementation in this session. DO NOT write any code.**
+
+---
+
+### In Your New Session, You MUST:
+
+#### 1. Load the Feature Context and Skills
+```
+/load-feature {feature-name}
+```
+This loads:
+- The implementation plan from FEAT.md "What's Next" section
+- The required skills declared in FEAT.md (e.g., python, grpc, flutter)
+- Branch and file tracking from TRACKING.md
+
+#### 2. Use Sub-Agents for ALL Implementation
+
+**Implementation MUST be done via sub-agents. Do NOT write code directly.**
+
+| Command | Sub-Agent | Use For |
+|---------|-----------|---------|
+| `/tdd` | tdd-guide | Write tests FIRST, then minimal code to pass |
+| `/build-fix` | build-error-resolver | Fix build, type, or lint errors |
+| `/code-review` | code-reviewer | Review completed code for quality |
+| `/refactor-clean` | refactor-cleaner | Clean up dead code, consolidate |
+| `/verify` | security-reviewer | Check for vulnerabilities |
+
+**Why sub-agents?**
+- They have specialized expertise for each task
+- They follow established patterns (TDD, security, etc.)
+- They produce higher quality, more consistent code
+- Direct coding bypasses quality gates
+
+#### 3. Follow the Implementation Phases
+Work through the phases in FEAT.md "What's Next" section in order.
+
+---
+
+### Why a New Session?
+
+- **Context efficiency**: Planning sessions accumulate research context that consumes tokens
+- **Clean slate**: Implementation works better focused on the approved plan
+- **Persistence**: The plan is saved in FEAT.md - it survives session boundaries
+- **Sub-agent focus**: Implementation agents work best without planning context baggage
 
 ## Related Agents
 
 This command invokes the `planner` agent located at:
-`~/.claude/agents/planner.md`
+`blueprints-cc-plugin/agents/planner.md`
