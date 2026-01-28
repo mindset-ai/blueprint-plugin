@@ -1,5 +1,15 @@
 # blueprints-cc-plugin
 
+## A Developer Force-Multiplier System
+
+> **One Developer + Claude Code + Blueprints = Full-Stack Development Team**
+
+This plugin transforms Claude Code from a coding assistant into an **intelligent development orchestrator**. It enables each developer to effectively manage a team of AI-driven specialists — planners, architects, testers, reviewers, and implementers — working in harmony across your entire platform stack.
+
+**The result:** Every developer becomes a full-stack developer, capable of shipping features across Flutter, Python, React, and gRPC with the velocity of an entire team.
+
+---
+
 **Claude Code plugin for the Mindset AI platform.**
 
 Commands, agents, and rules to accelerate development across Flutter, Python, and React codebases.
@@ -8,7 +18,9 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 
 ## Quick Start
 
-Add to your `~/.claude/settings.json`:
+**New here?** See the full [QUICKSTART.md](QUICKSTART.md) guide for step-by-step setup.
+
+**Already have the repos cloned?** Add to your `~/.claude/settings.json`:
 
 ```json
 {
@@ -17,7 +29,10 @@ Add to your `~/.claude/settings.json`:
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
-      "source": { "source": "local", "path": "/path/to/blueprints-cc-plugin" }
+      "source": {
+        "source": "directory",
+        "path": "/path/to/blueprints-cc-plugin"
+      }
     }
   }
 }
@@ -232,30 +247,9 @@ blueprints/pods/{pod}/features/{feature}/
 
 ---
 
-## Installation Options
+## Installation
 
-### Plugin (Recommended)
-
-```json
-{
-  "enabledPlugins": {
-    "mindset-claude-code@blueprints-cc-plugin": true
-  },
-  "extraKnownMarketplaces": {
-    "mindset-claude-code": {
-      "source": { "source": "local", "path": "/path/to/blueprints-cc-plugin" }
-    }
-  }
-}
-```
-
-### Manual
-
-```bash
-cp blueprints-cc-plugin/agents/*.md ~/.claude/agents/
-cp blueprints-cc-plugin/rules/*.md ~/.claude/rules/
-cp blueprints-cc-plugin/commands/*.md ~/.claude/commands/
-```
+See the [QUICKSTART.md](QUICKSTART.md#getting-started) guide for step-by-step installation instructions for VS Code and CLI.
 
 ---
 
