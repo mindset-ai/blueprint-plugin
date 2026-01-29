@@ -295,4 +295,4 @@ Work through the phases in FEAT.md "What's Next" section in order.
 ## Related Agents
 
 This command invokes the `planner` agent located at:
-`blueprints-cc-plugin/agents/planner.md`
+`blueprints-plugin/agents/planner.md`

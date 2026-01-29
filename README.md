@@ -1,4 +1,4 @@
-# blueprints-cc-plugin
+# blueprints-plugin
 
 ## A Developer Force-Multiplier System
 
@@ -7,6 +7,10 @@
 This plugin transforms Claude Code from a coding assistant into an **intelligent development orchestrator**. It enables each developer to effectively manage a team of AI-driven specialists — planners, architects, testers, reviewers, and implementers — working in harmony across your entire platform stack.
 
 **The result:** Every developer becomes a full-stack developer, capable of shipping features across Flutter, Python, React, and gRPC with the velocity of an entire team.
+
+## Watch the Video
+
+[![Blueprints Plugin Overview](https://img.youtube.com/vi/RGXmYNv1KT4/maxresdefault.jpg)](https://youtu.be/RGXmYNv1KT4)
 
 ---
 
@@ -25,13 +29,13 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 ```json
 {
   "enabledPlugins": {
-    "mindset-claude-code@blueprints-cc-plugin": true
+    "mindset-claude-code@blueprints-plugin": true
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
       "source": {
         "source": "directory",
-        "path": "/path/to/blueprints-cc-plugin"
+        "path": "/path/to/blueprints-plugin"
       }
     }
   }
@@ -42,14 +46,22 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 
 ## Commands
 
+### Epic Context (Product)
+
+| Command | What it does |
+|---------|--------------|
+| `/load-epic` | Load epic context. Reads EPIC.md, lists research docs, finds linked features across pods. |
+| `/new-epic` | Create new epic folder with EPIC.md template in the `pm` pod. |
+| `/update-epic` | Update epic docs with decisions, requirement changes, feature status. |
+
 ### Feature Context (Start Here)
 
 | Command | What it does |
 |---------|--------------|
-| `/load-feature` | **Start of session.** Load feature context and skills. Reads FEAT.md, TRACKING.md, context.md, latest handoff, and declared skills. |
+| `/load-feature` | **Start of session.** Load feature context and skills. Reads FEAT.md, TRACKING.md, context.md, latest handoff, declared skills, and parent epic if linked. |
 | `/load-skill` | Load skills without a feature. Supports aliases (e.g., `dart` → `flutter`, `proto` → `grpc`). |
 | `/update-feature` | **During/end of session.** Update feature docs with progress, new blockers, decisions made. |
-| `/new-feature` | Create new feature folder with FEAT.md and TRACKING.md from templates. |
+| `/new-feature` | Create new feature folder with FEAT.md and TRACKING.md from templates. Supports `--epic` to link to an epic. |
 
 ### Planning & Development
 
@@ -98,6 +110,7 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 How to use these commands together:
 
 ```
+0. EPIC       →  /load-epic          Load epic context (product requirements)
 0. CONTEXT    →  /load-feature      Load feature context and skills (START HERE)
 1. PLAN       →  /plan-feature       Create implementation plan, get approval
 2. IMPLEMENT  →  /tdd               Write tests first, then code
@@ -173,38 +186,6 @@ Specialized subagents that handle delegated tasks:
 
 ---
 
-## mindset_v2 Commands (GitLab Integration)
-
-The mindset_v2 project has additional `/ms-*` commands with GitLab integration:
-
-| Command | What it does |
-|---------|--------------|
-| `/ms-story-plan` | Full story setup. Fetches GitLab issue, creates branch, requirements doc, and implementation plan with security classification. |
-| `/ms-implement-secure` | Implement with security practices based on classification (Standard/Security-Aware/Security-Critical). |
-| `/ms-tdd-fix` | TDD bug fix. Write failing test first, then fix. |
-| `/ms-security-review` | Pre-deployment security verification for Security-Aware/Critical stories. |
-| `/ms-create-mr` | Create GitLab MR with proper description, reviewers, and labels. |
-| `/ms-classify-story` | Determine security classification (optional - ms-story-plan does this automatically). |
-
-### Which to use?
-
-```
-Working on mindset_v2 with a GitLab issue?
-├─ YES → Use /ms-* commands
-│   ├─ Starting story? → /ms-story-plan
-│   ├─ Implementing? → /ms-implement-secure  
-│   ├─ Bug fix? → /ms-tdd-fix
-│   └─ Ready for MR? → /ms-create-mr
-│
-└─ NO → Use plugin commands
-    ├─ Planning? → /plan-feature
-    ├─ New code? → /tdd
-    ├─ Review? → /code-review
-    └─ Build errors? → /build-fix
-```
-
----
-
 ## Rules
 
 Always-follow guidelines loaded into every session:
@@ -220,19 +201,29 @@ Always-follow guidelines loaded into every session:
 
 ---
 
-## Feature Structure (Blueprints)
+## Epic & Feature Structure (Blueprints)
 
-Features in the blueprints repo use this structure:
+### Epics (Product owns - `pm` pod)
+
+```
+blueprints/pods/pm/epics/{epic-name}/
+├── EPIC.md         # Requirements, user stories, scope, success metrics
+└── research/       # Research documents and analysis
+```
+
+### Features (Engineering owns - pod-specific)
 
 ```
 blueprints/pods/{pod}/features/{feature}/
-├── FEAT.md         # THE living document - status, blockers, patterns, skills, local dev
+├── FEAT.md         # THE living document - status, epic link, blockers, patterns, skills, local dev
 ├── TRACKING.md     # Cross-repo branches, deployment order, files changed
 ├── context.md      # Current state, session log
 ├── CLAUDE.md       # Feature-specific instructions
 ├── handoffs/       # Session summaries
 └── archive/        # Historical docs
 ```
+
+Features link to their parent epic via the `Epic:` field in FEAT.md. `/load-feature` automatically loads the parent epic context.
 
 **Skills Declaration** in FEAT.md:
 ```markdown

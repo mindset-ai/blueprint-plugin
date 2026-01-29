@@ -2,7 +2,7 @@
 
 ## Available Agents
 
-Located in `blueprints-cc-plugin/agents/`:
+Located in `blueprints-plugin/agents/`:
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
