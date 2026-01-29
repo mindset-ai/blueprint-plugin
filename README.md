@@ -173,38 +173,6 @@ Specialized subagents that handle delegated tasks:
 
 ---
 
-## mindset_v2 Commands (GitLab Integration)
-
-The mindset_v2 project has additional `/ms-*` commands with GitLab integration:
-
-| Command | What it does |
-|---------|--------------|
-| `/ms-story-plan` | Full story setup. Fetches GitLab issue, creates branch, requirements doc, and implementation plan with security classification. |
-| `/ms-implement-secure` | Implement with security practices based on classification (Standard/Security-Aware/Security-Critical). |
-| `/ms-tdd-fix` | TDD bug fix. Write failing test first, then fix. |
-| `/ms-security-review` | Pre-deployment security verification for Security-Aware/Critical stories. |
-| `/ms-create-mr` | Create GitLab MR with proper description, reviewers, and labels. |
-| `/ms-classify-story` | Determine security classification (optional - ms-story-plan does this automatically). |
-
-### Which to use?
-
-```
-Working on mindset_v2 with a GitLab issue?
-├─ YES → Use /ms-* commands
-│   ├─ Starting story? → /ms-story-plan
-│   ├─ Implementing? → /ms-implement-secure  
-│   ├─ Bug fix? → /ms-tdd-fix
-│   └─ Ready for MR? → /ms-create-mr
-│
-└─ NO → Use plugin commands
-    ├─ Planning? → /plan-feature
-    ├─ New code? → /tdd
-    ├─ Review? → /code-review
-    └─ Build errors? → /build-fix
-```
-
----
-
 ## Rules
 
 Always-follow guidelines loaded into every session:
