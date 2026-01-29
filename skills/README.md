@@ -23,6 +23,7 @@ blueprints/.claude/skills/
 | **blueprints**   | Blueprints workflow, skills, and commands            |
 | **brand**        | Brand voice, copywriting, and terminology            |
 | **ui**           | UI patterns and design system (load with brand)      |
+| **tinybird**     | TinyBird ClickHouse real-time analytics              |
 
 ## Usage
 
