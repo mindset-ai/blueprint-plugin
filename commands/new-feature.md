@@ -19,6 +19,7 @@ Creates a new feature folder structure in the blueprints repository.
 ```
 /new-feature {feature-name}
 /new-feature {feature-name} in {pod-name}
+/new-feature {feature-name} in {pod-name} --epic {epic-name}
 ```
 
 Examples:
@@ -26,6 +27,7 @@ Examples:
 /new-feature feat-knowledge-search
 /new-feature feat-widget-export in wip
 /new-feature feat-auth-refresh in core
+/new-feature feat-voice-ui in wip --epic epic-voice-journeys
 ```
 
 ## Process
@@ -50,6 +52,7 @@ blueprints/pods/{pod}/features/{feature-name}/
 
 Copy from `blueprints/pods/_template/features/_template/FEAT.md` and replace:
 - `{Feature Name}` → Feature name (title case, spaces)
+- `{epic-name or N/A}` → Epic name if `--epic` provided, otherwise `N/A`
 - `{branch-name}` → `feature/{feature-name}`
 - `{YYYY-MM-DD}` → Today's date
 - `{repos}` → Leave as placeholder for user to fill

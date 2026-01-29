@@ -22,8 +22,9 @@ Load all context needed to work on a feature. This is the recommended first comm
    - `context.md` (current state, blockers, decisions)
    - `CLAUDE.md` (feature-specific instructions and gotchas)
 3. **Read the latest handoff** from `handoffs/` folder (most recent session summary)
-4. **Parse the Skills section** from FEAT.md and read each declared skill
-5. **Output a concise summary** so you're ready to work
+4. **Check the Epic field** in FEAT.md. If set (not N/A), read `blueprints/pods/pm/epics/{epic-name}/EPIC.md` to load parent epic context
+5. **Parse the Skills section** from FEAT.md and read each declared skill
+6. **Output a concise summary** so you're ready to work
 
 ## Feature Document Locations
 
@@ -65,6 +66,9 @@ After reading all context, output a summary:
 
 ```markdown
 # Feature Loaded: {feature-name}
+
+## Epic
+{Epic name and key requirements, or "None"}
 
 ## Status
 {Current status from FEAT.md}
