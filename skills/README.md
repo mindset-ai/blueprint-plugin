@@ -8,21 +8,22 @@ blueprints/.claude/skills/
 
 ## Available Skills
 
-| Skill | Description |
-|-------|-------------|
-| **flutter** | Flutter/Dart development patterns and best practices |
-| **python** | Python development for cloud functions and AI agents |
-| **react** | React SDK v3 development patterns |
-| **grpc** | gRPC and Protocol Buffer patterns |
-| **firebase** | Firebase/Firestore patterns and best practices |
-| **mcp** | MCP server development and integration |
-| **testing** | Test-driven development workflows |
-| **architecture** | System architecture and design patterns |
-| **deployment** | Cloud Run deployment for MCP servers |
-| **snowflake** | Snowflake database setup and best practices |
-| **blueprints** | Blueprints workflow, skills, and commands |
-| **brand** | Brand voice, copywriting, and terminology |
-| **ui** | UI patterns and design system (load with brand) |
+| Skill                  | Description                                          |
+| ---------------------- | ---------------------------------------------------- |
+| **ai-agent**     | LangGraph-based AI Agent v3 patterns and node development |
+| **flutter**      | Flutter/Dart development patterns and best practices |
+| **python**       | Python development for cloud functions and cloud run containers              |
+| **react**        | React SDK v3 development patterns                    |
+| **grpc**         | gRPC and Protocol Buffer patterns                    |
+| **firebase**     | Firebase/Firestore patterns and best practices       |
+| **mcp**          | MCP server development and integration               |
+| **testing**      | Test-driven development workflows                    |
+| **architecture** | System architecture and design patterns              |
+| **deployment**   | Cloud Run deployment for MCP servers                 |
+| **snowflake**    | Snowflake database setup and best practices          |
+| **blueprints**   | Blueprints workflow, skills, and commands            |
+| **brand**        | Brand voice, copywriting, and terminology            |
+| **ui**           | UI patterns and design system (load with brand)      |
 
 ## Usage
 
