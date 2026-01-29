@@ -35,7 +35,7 @@ After analyzing existing commands (`/plan-feature`, `/tdd`, `/checkpoint`), we d
 
 ## `/load-feature` Command
 
-**File:** `blueprints-cc-plugin/commands/load-feature.md`
+**File:** `blueprints-plugin/commands/load-feature.md`
 
 ### What It Does
 
@@ -118,7 +118,7 @@ Ready to work on feat-journeys.
 
 ## `/update-feature` Command
 
-**File:** `blueprints-cc-plugin/commands/update-feature.md`
+**File:** `blueprints-plugin/commands/update-feature.md`
 
 ### What It Does
 
@@ -237,9 +237,9 @@ Added Skills sections to:
 
 | File | Action |
 |------|--------|
-| `blueprints-cc-plugin/commands/load-feature.md` | Created |
-| `blueprints-cc-plugin/commands/update-feature.md` | Created |
-| `blueprints-cc-plugin/README.md` | Updated with new commands |
+| `blueprints-plugin/commands/load-feature.md` | Created |
+| `blueprints-plugin/commands/update-feature.md` | Created |
+| `blueprints-plugin/README.md` | Updated with new commands |
 | `blueprints/pods/_template/features/_template/FEAT.md` | Added Skills section |
 | `blueprints/pods/wip/features/feat-journeys/FEATURE.md` | Added Skills section |
 | `blueprints/pods/wip/features/feat-widget-mcp/FEAT.md` | Added Skills section |
@@ -298,7 +298,7 @@ To verify implementation:
 
 ## References
 
-- **Command files:** `blueprints-cc-plugin/commands/`
+- **Command files:** `blueprints-plugin/commands/`
 - **Skill files:** `blueprints/.claude/skills/*/SKILL.md`
 - **Feature template:** `blueprints/pods/_template/features/_template/`
 - **Existing features:** `blueprints/pods/wip/features/`

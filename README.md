@@ -1,4 +1,4 @@
-# blueprints-cc-plugin
+# blueprints-plugin
 
 ## A Developer Force-Multiplier System
 
@@ -25,13 +25,13 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 ```json
 {
   "enabledPlugins": {
-    "mindset-claude-code@blueprints-cc-plugin": true
+    "mindset-claude-code@blueprints-plugin": true
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
       "source": {
         "source": "directory",
-        "path": "/path/to/blueprints-cc-plugin"
+        "path": "/path/to/blueprints-plugin"
       }
     }
   }

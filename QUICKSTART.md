@@ -15,7 +15,7 @@ This is where all the **documentation lives**:
 
 Think of it as **the team's shared brain** — everything anyone needs to know about any feature, captured in markdown files that survive across sessions and developers.
 
-### 2. blueprints-cc-plugin (the tooling)
+### 2. blueprints-plugin (the tooling)
 
 This is the **Claude Code plugin** that makes the knowledge base useful:
 
@@ -31,7 +31,7 @@ Think of it as **the smart assistant** that knows how to navigate the knowledge 
 
 **blueprints** grows constantly — every feature adds docs, every session adds handoffs, every decision gets recorded.
 
-**blueprints-cc-plugin** is relatively stable — the commands and agents don't change often.
+**blueprints-plugin** is relatively stable — the commands and agents don't change often.
 
 Keeping them separate means:
 - The plugin can be versioned independently
@@ -61,10 +61,10 @@ blueprints/
 │   └── platform/         # Infrastructure
 ```
 
-### blueprints-cc-plugin/
+### blueprints-plugin/
 
 ```
-blueprints-cc-plugin/
+blueprints-plugin/
 ├── commands/             # Slash commands (/load-feature, /plan-feature, /tdd, etc.)
 ├── agents/               # Specialized sub-agents (planner, reviewer, etc.)
 ├── rules/                # Always-on guidelines (security, testing, git)
@@ -78,7 +78,7 @@ blueprints-cc-plugin/
 
 1. **You run a command** like `/load-feature feat-journeys`
 
-2. **The plugin** (from blueprints-cc-plugin) handles the command
+2. **The plugin** (from blueprints-plugin) handles the command
 
 3. **The plugin reads** the feature docs from the blueprints repo
 
@@ -101,9 +101,9 @@ The VS Code extension requires **manual installation**:
 mkdir -p ~/.claude/commands ~/.claude/agents ~/.claude/rules
 
 # 2. Copy plugin files
-cp /path/to/blueprints-cc-plugin/commands/*.md ~/.claude/commands/
-cp /path/to/blueprints-cc-plugin/agents/*.md ~/.claude/agents/
-cp /path/to/blueprints-cc-plugin/rules/*.md ~/.claude/rules/
+cp /path/to/blueprints-plugin/commands/*.md ~/.claude/commands/
+cp /path/to/blueprints-plugin/agents/*.md ~/.claude/agents/
+cp /path/to/blueprints-plugin/rules/*.md ~/.claude/rules/
 
 # 3. Add blueprints repo to allowed directories in ~/.claude/settings.json
 ```
@@ -114,7 +114,7 @@ Example `~/.claude/settings.json`:
 {
   "allowedDirectories": [
     "/path/to/your/project",
-    "/path/to/blueprints-cc-plugin",
+    "/path/to/blueprints-plugin",
     "/path/to/blueprints"
   ]
 }
@@ -129,13 +129,13 @@ The CLI supports the plugin marketplace system. Add to `~/.claude/settings.json`
 ```json
 {
   "enabledPlugins": {
-    "mindset-claude-code@blueprints-cc-plugin": true
+    "mindset-claude-code@blueprints-plugin": true
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
       "source": {
         "source": "directory",
-        "path": "/path/to/blueprints-cc-plugin"
+        "path": "/path/to/blueprints-plugin"
       }
     }
   }
