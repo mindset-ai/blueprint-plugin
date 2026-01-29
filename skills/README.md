@@ -7,7 +7,6 @@ blueprints/.claude/skills/
 ```
 
 ## Available Skills
-
 | Skill                  | Description                                          |
 | ---------------------- | ---------------------------------------------------- |
 | **ai-agent**     | LangGraph-based AI Agent v3 patterns and node development |
