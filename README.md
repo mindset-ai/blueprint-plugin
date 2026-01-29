@@ -8,6 +8,10 @@ This plugin transforms Claude Code from a coding assistant into an **intelligent
 
 **The result:** Every developer becomes a full-stack developer, capable of shipping features across Flutter, Python, React, and gRPC with the velocity of an entire team.
 
+## Watch the Video
+
+[![Blueprints Plugin Overview](https://img.youtube.com/vi/RGXmYNv1KT4/maxresdefault.jpg)](https://youtu.be/RGXmYNv1KT4)
+
 ---
 
 **Claude Code plugin for the Mindset AI platform.**
