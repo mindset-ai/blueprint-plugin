@@ -122,6 +122,22 @@ Example `~/.claude/settings.json`:
 
 After copying the files, reload VS Code (`Cmd+Shift+P` → "Reload Window").
 
+#### Uninstalling or Updating the Plugin (VS Code)
+
+To remove the plugin or update to a new version:
+
+```bash
+# Remove old plugin files
+rm -f ~/.claude/commands/*.md ~/.claude/agents/*.md ~/.claude/rules/*.md
+
+# (Optional) Re-copy if updating to new version
+cp /path/to/blueprints-plugin/commands/*.md ~/.claude/commands/
+cp /path/to/blueprints-plugin/agents/*.md ~/.claude/agents/
+cp /path/to/blueprints-plugin/rules/*.md ~/.claude/rules/
+
+# Reload VS Code (Cmd+Shift+P → "Reload Window")
+```
+
 ### CLI (`claude` command)
 
 The CLI supports the plugin marketplace system. Add to `~/.claude/settings.json`:

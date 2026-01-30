@@ -25,7 +25,7 @@ The command supports common aliases that map to the canonical skill names:
 | `firestore` | `firebase` | Firestore is part of Firebase |
 | `auth` | `firebase` | Firebase Auth patterns |
 | `proto`, `protobuf`, `buf` | `grpc` | Protocol Buffers are part of gRPC skill |
-| `langgraph`, `langchain` | `python` | LangGraph/LangChain covered in Python skill |
+| `langgraph`, `langchain` | `ai-agent` | LangGraph/LangChain agent patterns |
 | `cloud-functions`, `cf` | `python` | Cloud functions are Python |
 | `tdd`, `tests` | `testing` | Test-driven development |
 | `js`, `javascript`, `typescript`, `ts` | `react` | JS/TS covered in React skill |
@@ -37,6 +37,8 @@ The command supports common aliases that map to the canonical skill names:
 | `workflow`, `commands` | `blueprint` | Blueprint workflow system |
 | `copywriting`, `copy`, `content`, `writing`, `voice` | `brand` | Brand voice and copywriting |
 | `design-system`, `components`, `theming` | `ui` | UI patterns and design system |
+| `clickhouse`, `ch`, `analytics`, `mcp-events` | `tinybird` | TinyBird ClickHouse analytics |
+| `agent`, `aiagent`, `agent-v3`, `aiagent-v3` | `ai-agent` | AI Agent v3 LangGraph patterns |
 
 ## Available Skills
 
@@ -57,6 +59,8 @@ Located at `blueprint/.claude/skills/{skill}/SKILL.md`:
 | `blueprint` | Blueprint workflow, skills, and commands |
 | `brand` | Brand voice, copywriting, and terminology |
 | `ui` | UI patterns and design system (load with brand) |
+| `tinybird` | TinyBird ClickHouse real-time analytics |
+| `ai-agent` | AI Agent v3 LangGraph patterns and node development |
 
 ## What This Command Does
 
@@ -132,10 +136,16 @@ const SKILL_ALIASES = {
   'buf': 'grpc',
   
   // Python
-  'langgraph': 'python',
-  'langchain': 'python',
   'cloud-functions': 'python',
   'cf': 'python',
+
+  // AI Agent
+  'agent': 'ai-agent',
+  'aiagent': 'ai-agent',
+  'agent-v3': 'ai-agent',
+  'aiagent-v3': 'ai-agent',
+  'langgraph': 'ai-agent',
+  'langchain': 'ai-agent',
   
   // Testing
   'tdd': 'testing',
@@ -184,6 +194,12 @@ const SKILL_ALIASES = {
   'design-system': 'ui',
   'components': 'ui',
   'theming': 'ui',
+
+  // TinyBird
+  'clickhouse': 'tinybird',
+  'ch': 'tinybird',
+  'analytics': 'tinybird',
+  'events': 'tinybird',
 };
 ```
 
