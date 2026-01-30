@@ -20,5 +20,6 @@
     "best-practices"
   ],
   "commands": "./commands",
-  "skills": "./skills"
+  "skills": "../blueprint/.claude/skills",
+  "hooks": "./hooks/hooks.json"
 }
