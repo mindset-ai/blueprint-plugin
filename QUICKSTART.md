@@ -131,9 +131,9 @@ To remove the plugin or update to a new version:
 rm -f ~/.claude/commands/*.md ~/.claude/agents/*.md ~/.claude/rules/*.md
 
 # (Optional) Re-copy if updating to new version
-cp /path/to/blueprints-plugin/commands/*.md ~/.claude/commands/
-cp /path/to/blueprints-plugin/agents/*.md ~/.claude/agents/
-cp /path/to/blueprints-plugin/rules/*.md ~/.claude/rules/
+cp /path/to/blueprint-plugin/commands/*.md ~/.claude/commands/
+cp /path/to/blueprint-plugin/agents/*.md ~/.claude/agents/
+cp /path/to/blueprint-plugin/rules/*.md ~/.claude/rules/
 
 # Reload VS Code (Cmd+Shift+P → "Reload Window")
 ```
