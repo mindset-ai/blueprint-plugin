@@ -32,10 +32,10 @@ This command invokes the **planner** agent to create a comprehensive implementat
 
 ## Feature Location: Pods and Structure
 
-All plans are written to the blueprints pod/feature structure:
+All plans are written to the blueprint pod/feature structure:
 
 ```
-blueprints/pods/[pod-name]/features/[feature-name]/
+blueprint/pods/[pod-name]/features/[feature-name]/
 ├── FEAT.md         # THE living document - plan goes in "What's Next" section
 ├── TRACKING.md     # Cross-repo branches, deployment order, files changed
 └── archive/        # Historical docs (analysis, old plans, reviews)
@@ -55,7 +55,7 @@ blueprints/pods/[pod-name]/features/[feature-name]/
 When `/plan-feature` is invoked:
 
 1. **If feature specified** (e.g., `/plan-feature feat-journeys: add X`):
-   - Find the feature at `blueprints/pods/*/features/feat-journeys/`
+   - Find the feature at `blueprint/pods/*/features/feat-journeys/`
    - Use that pod location
 
 2. **If new feature needed**:
@@ -77,7 +77,7 @@ Before creating any plan, the planner MUST load relevant skills:
    - grpc
    - flutter
    ```
-   Read each skill from `blueprints/.claude/skills/{skill}/SKILL.md`
+   Read each skill from `blueprint/.claude/skills/{skill}/SKILL.md`
 
 2. **If new feature** - Ask user which skills are relevant, or infer from request:
    - Python backend work → load `python`, `grpc`
@@ -194,7 +194,7 @@ This appears to be new functionality. Which pod should this belong to?
 User: wip
 
 Agent (planner):
-Creating feature at: blueprints/pods/wip/features/feat-knowledge-search/
+Creating feature at: blueprint/pods/wip/features/feat-knowledge-search/
 
 ## Skills Loaded
 - python (LangGraph, cloud functions)
@@ -215,7 +215,7 @@ Creating feature at: blueprints/pods/wip/features/feat-knowledge-search/
 **WAITING FOR CONFIRMATION**: Approve this plan? (yes/no/modify)
 
 Once approved, I will:
-1. Write the plan to `blueprints/pods/wip/features/feat-knowledge-search/FEAT.md`
+1. Write the plan to `blueprint/pods/wip/features/feat-knowledge-search/FEAT.md`
 2. Update `TRACKING.md` with branches and file changes
 3. You should then START A NEW SESSION to implement
 ```
@@ -295,4 +295,4 @@ Work through the phases in FEAT.md "What's Next" section in order.
 ## Related Agents
 
 This command invokes the `planner` agent located at:
-`blueprints-plugin/agents/planner.md`
+`blueprint-plugin/agents/planner.md`

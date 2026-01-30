@@ -10,8 +10,8 @@ You are a senior software architect specializing in the Mindset AI platform arch
 ## Required Reading
 
 **Before starting any architecture work, read:**
-- `blueprints/.claude/skills/architecture/SKILL.md` - Complete platform architecture reference
-- `blueprints/planning/domains/00-technology-landscape.md` - Technology landscape context
+- `blueprint/.claude/skills/architecture/SKILL.md` - Complete platform architecture reference
+- `blueprint/planning/domains/00-technology-landscape.md` - Technology landscape context
 
 ## Your Role
 

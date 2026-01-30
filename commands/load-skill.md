@@ -34,13 +34,13 @@ The command supports common aliases that map to the canonical skill names:
 | `design`, `system-design` | `architecture` | System architecture |
 | `deploy`, `cloud-run`, `cr` | `deployment` | Cloud Run deployment |
 | `sf`, `data-warehouse`, `dwh` | `snowflake` | Snowflake database |
-| `workflow`, `commands` | `blueprints` | Blueprints workflow system |
+| `workflow`, `commands` | `blueprint` | Blueprint workflow system |
 | `copywriting`, `copy`, `content`, `writing`, `voice` | `brand` | Brand voice and copywriting |
 | `design-system`, `components`, `theming` | `ui` | UI patterns and design system |
 
 ## Available Skills
 
-Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
+Located at `blueprint/.claude/skills/{skill}/SKILL.md`:
 
 | Skill | Description |
 |-------|-------------|
@@ -54,7 +54,7 @@ Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
 | `architecture` | System design, cross-repo patterns |
 | `deployment` | Cloud Run deployment for MCP servers |
 | `snowflake` | Snowflake database setup and best practices |
-| `blueprints` | Blueprints workflow, skills, and commands |
+| `blueprint` | Blueprint workflow, skills, and commands |
 | `brand` | Brand voice, copywriting, and terminology |
 | `ui` | UI patterns and design system (load with brand) |
 
@@ -63,7 +63,7 @@ Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
 1. **Parse requested skills** from arguments
 2. **Resolve aliases** to canonical skill names
 3. **Deduplicate** (if `dart` and `flutter` both requested, only load `flutter` once)
-4. **Read each skill file** from `blueprints/.claude/skills/{skill}/SKILL.md`
+4. **Read each skill file** from `blueprint/.claude/skills/{skill}/SKILL.md`
 5. **Output summary** of loaded skills
 
 ## Example
@@ -72,8 +72,8 @@ Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
 User: /load-skill dart grpc
 
 Claude: [Resolves 'dart' → 'flutter']
-        [Reads blueprints/.claude/skills/flutter/SKILL.md]
-        [Reads blueprints/.claude/skills/grpc/SKILL.md]
+        [Reads blueprint/.claude/skills/flutter/SKILL.md]
+        [Reads blueprint/.claude/skills/grpc/SKILL.md]
 
 # Skills Loaded
 
@@ -169,9 +169,9 @@ const SKILL_ALIASES = {
   'data-warehouse': 'snowflake',
   'dwh': 'snowflake',
 
-  // Blueprints
-  'workflow': 'blueprints',
-  'commands': 'blueprints',
+  // Blueprint
+  'workflow': 'blueprint',
+  'commands': 'blueprint',
 
   // Brand
   'copywriting': 'brand',

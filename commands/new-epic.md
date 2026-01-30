@@ -21,8 +21,8 @@ Examples:
 ## What This Command Does
 
 1. **Validate name** - Epic names should use kebab-case with `epic-` prefix
-2. **Create folder** at `blueprints/pods/pm/epics/{epic-name}/`
-3. **Copy EPIC.md** from `blueprints/pods/_template/epics/_template/EPIC.md`
+2. **Create folder** at `blueprint/pods/pm/epics/{epic-name}/`
+3. **Copy EPIC.md** from `blueprint/pods/_template/epics/_template/EPIC.md`
 4. **Replace placeholders**:
    - `{Epic Name}` → Epic name (title case, spaces)
    - `{YYYY-MM-DD}` → Today's date
@@ -34,7 +34,7 @@ Examples:
 ### Step 1: Create Structure
 
 ```
-blueprints/pods/pm/epics/{epic-name}/
+blueprint/pods/pm/epics/{epic-name}/
 ├── EPIC.md         # Product requirements, scope, success metrics
 └── research/       # For research documents
 ```
@@ -46,7 +46,7 @@ Copy from template and replace placeholders.
 ### Step 3: Confirm
 
 ```
-Created: blueprints/pods/pm/epics/{epic-name}/
+Created: blueprint/pods/pm/epics/{epic-name}/
 ├── EPIC.md
 └── research/
 
@@ -58,10 +58,10 @@ Next steps:
 
 ## Template Location
 
-- EPIC.md template: `blueprints/pods/_template/epics/_template/EPIC.md`
+- EPIC.md template: `blueprint/pods/_template/epics/_template/EPIC.md`
 
 ## Notes
 
 - Epic names should use kebab-case with `epic-` prefix (e.g., `epic-voice-journeys`)
-- All epics live in the `pm` pod at `blueprints/pods/pm/epics/`
+- All epics live in the `pm` pod at `blueprint/pods/pm/epics/`
 - Link features to epics using the `Epic:` field in FEAT.md

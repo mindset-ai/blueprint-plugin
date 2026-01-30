@@ -14,7 +14,7 @@ Load all context for an epic. Use this when working on product requirements, rev
 
 ## What This Command Does
 
-1. **Find the epic** at `blueprints/pods/pm/epics/{epic-name}/`
+1. **Find the epic** at `blueprint/pods/pm/epics/{epic-name}/`
 2. **Read `EPIC.md`** - Requirements, user stories, scope, success metrics
 3. **List research docs** in `research/` folder
 4. **Find linked features** - Scan all pods for features with matching `Epic: {epic-name}` in their FEAT.md. List each with pod, name, and status.
@@ -24,7 +24,7 @@ Load all context for an epic. Use this when working on product requirements, rev
 ## Epic Document Location
 
 ```
-blueprints/pods/pm/epics/{epic-name}/
+blueprint/pods/pm/epics/{epic-name}/
 ├── EPIC.md         # Requirements, scope, success metrics, features table
 └── research/       # Research documents and analysis
 ```
@@ -34,7 +34,7 @@ blueprints/pods/pm/epics/{epic-name}/
 Search across all pods for features that reference this epic:
 
 ```bash
-grep -rl "Epic:.*{epic-name}" blueprints/pods/*/features/*/FEAT.md 2>/dev/null
+grep -rl "Epic:.*{epic-name}" blueprint/pods/*/features/*/FEAT.md 2>/dev/null
 ```
 
 For each match, read the feature's status from its FEAT.md header.
@@ -75,7 +75,7 @@ Ready to work on {epic-name}.
 If the epic folder doesn't exist, list available epics:
 
 ```bash
-ls blueprints/pods/pm/epics/ 2>/dev/null
+ls blueprint/pods/pm/epics/ 2>/dev/null
 ```
 
 And prompt the user to choose one or create a new epic with `/new-epic`.

@@ -4,12 +4,12 @@ description: Create a new feature folder with FEAT.md and TRACKING.md from templ
 
 # New Feature Command
 
-Creates a new feature folder structure in the blueprints repository.
+Creates a new feature folder structure in the blueprint repository.
 
 ## What This Command Does
 
 1. **Prompt for details** - Get feature name and pod location
-2. **Create folder** - Set up `blueprints/pods/{pod}/features/{feature-name}/`
+2. **Create folder** - Set up `blueprint/pods/{pod}/features/{feature-name}/`
 3. **Copy templates** - Create FEAT.md and TRACKING.md from templates
 4. **Initialize content** - Replace placeholders with feature-specific values
 5. **Create archive folder** - For historical documents
@@ -42,7 +42,7 @@ If pod not specified, ask user which pod:
 ### Step 2: Create Structure
 
 ```
-blueprints/pods/{pod}/features/{feature-name}/
+blueprint/pods/{pod}/features/{feature-name}/
 ├── FEAT.md         # Living document - status, blockers, patterns, local dev
 ├── TRACKING.md     # Cross-repo branches, deployment order
 └── archive/        # For historical docs later
@@ -50,7 +50,7 @@ blueprints/pods/{pod}/features/{feature-name}/
 
 ### Step 3: Initialize FEAT.md
 
-Copy from `blueprints/pods/_template/features/_template/FEAT.md` and replace:
+Copy from `blueprint/pods/_template/features/_template/FEAT.md` and replace:
 - `{Feature Name}` → Feature name (title case, spaces)
 - `{epic-name or N/A}` → Epic name if `--epic` provided, otherwise `N/A`
 - `{branch-name}` → `feature/{feature-name}`
@@ -59,14 +59,14 @@ Copy from `blueprints/pods/_template/features/_template/FEAT.md` and replace:
 
 ### Step 4: Initialize TRACKING.md
 
-Copy from `blueprints/pods/_template/features/_template/TRACKING.md` and replace:
+Copy from `blueprint/pods/_template/features/_template/TRACKING.md` and replace:
 - `{Feature Name}` → Feature name (title case, spaces)
 
 ### Step 5: Confirm
 
 Display the created structure and next steps:
 ```
-Created: blueprints/pods/{pod}/features/{feature-name}/
+Created: blueprint/pods/{pod}/features/{feature-name}/
 ├── FEAT.md
 ├── TRACKING.md
 └── archive/
@@ -78,8 +78,8 @@ Next steps:
 
 ## Template Locations
 
-- FEAT.md template: `blueprints/pods/_template/features/_template/FEAT.md`
-- TRACKING.md template: `blueprints/pods/_template/features/_template/TRACKING.md`
+- FEAT.md template: `blueprint/pods/_template/features/_template/FEAT.md`
+- TRACKING.md template: `blueprint/pods/_template/features/_template/TRACKING.md`
 
 ## Notes
 

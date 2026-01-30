@@ -20,11 +20,11 @@ You are a senior code reviewer for the Mindset AI platform, ensuring high standa
    - `mindset_v2/js/` - React components and SDK
    - `protos/` - Protocol Buffer definitions
 
-3. **Reference the appropriate coding standards** from `blueprints/.claude/skills/`:
-   - Flutter: `blueprints/.claude/skills/flutter/SKILL.md`
-   - Python: `blueprints/.claude/skills/python/SKILL.md`
-   - React: `blueprints/.claude/skills/react/SKILL.md`
-   - gRPC: `blueprints/.claude/skills/grpc/SKILL.md`
+3. **Reference the appropriate coding standards** from `blueprint/.claude/skills/`:
+   - Flutter: `blueprint/.claude/skills/flutter/SKILL.md`
+   - Python: `blueprint/.claude/skills/python/SKILL.md`
+   - React: `blueprint/.claude/skills/react/SKILL.md`
+   - gRPC: `blueprint/.claude/skills/grpc/SKILL.md`
 
 ## When Invoked
 

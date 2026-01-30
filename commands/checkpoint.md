@@ -1,4 +1,4 @@
-# Checkpoint Command (Blueprints Handoff)
+# Checkpoint Command (Blueprint Handoff)
 
 Create a session handoff document for the current feature and update its context.
 
@@ -12,7 +12,7 @@ If `feature-name` is not provided, prompt the user to specify which feature they
 
 1. Creates a timestamped handoff document at:
    ```
-   blueprints/pods/[pod-name]/features/[feature-name]/handoffs/YYYY-MM-DD-session.md
+   blueprint/pods/[pod-name]/features/[feature-name]/handoffs/YYYY-MM-DD-session.md
    ```
 
 2. Updates the feature's `context.md` with session progress
@@ -158,12 +158,12 @@ Review generated handoff
 If the user doesn't specify a feature, list available features:
 
 ```bash
-find blueprints/pods/*/features -maxdepth 1 -type d -name "feat-*" 2>/dev/null
+find blueprint/pods/*/features -maxdepth 1 -type d -name "feat-*" 2>/dev/null
 ```
 
 Or list features in a specific pod:
 ```bash
-ls -d blueprints/pods/wip/features/feat-* 2>/dev/null | xargs -n1 basename
+ls -d blueprint/pods/wip/features/feat-* 2>/dev/null | xargs -n1 basename
 ```
 
 ## Arguments
@@ -178,8 +178,8 @@ $ARGUMENTS:
 ```
 
 Creates:
-- `blueprints/pods/wip/features/feat-widget-mcp/handoffs/2026-01-25-session.md`
-- Updates `blueprints/pods/wip/features/feat-widget-mcp/context.md` session log
+- `blueprint/pods/wip/features/feat-widget-mcp/handoffs/2026-01-25-session.md`
+- Updates `blueprint/pods/wip/features/feat-widget-mcp/context.md` session log
 
 ## Multiple Sessions Same Day
 

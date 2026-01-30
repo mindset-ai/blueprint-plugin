@@ -7,9 +7,9 @@ Comprehensive security, quality, and standards review of uncommitted changes acr
 1. **Get changed files**: `git diff --name-only HEAD`
 
 2. **Identify file types and load relevant standards**:
-   - Flutter/Dart files (`.dart`) - Load `blueprints/.claude/skills/flutter/SKILL.md`
-   - Python files (`.py`) - Load `blueprints/.claude/skills/python/SKILL.md`
-   - React/JS files (`.jsx`, `.js`, `.tsx`, `.ts`) - Load `blueprints/.claude/skills/react/SKILL.md`
+   - Flutter/Dart files (`.dart`) - Load `blueprint/.claude/skills/flutter/SKILL.md`
+   - Python files (`.py`) - Load `blueprint/.claude/skills/python/SKILL.md`
+   - React/JS files (`.jsx`, `.js`, `.tsx`, `.ts`) - Load `blueprint/.claude/skills/react/SKILL.md`
 
 3. **Check for feature CLAUDE.md**: Look for `llm/[story-number]/CLAUDE.md` in the relevant project directory for feature-specific decisions and constraints to follow
 

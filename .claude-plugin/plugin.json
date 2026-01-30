@@ -1,6 +1,6 @@
 {
-  "name": "blueprints-plugin",
-  "description": "Claude Code configurations for Mindset AI blueprints development",
+  "name": "blueprint-plugin",
+  "description": "Claude Code configurations for Mindset AI blueprint development",
   "author": {
     "name": "Mindset AI"
   },

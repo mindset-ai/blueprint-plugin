@@ -3,7 +3,7 @@
 The Mindset-specific Claude Code skills are located in:
 
 ```
-blueprints/.claude/skills/
+blueprint/.claude/skills/
 ```
 
 ## Available Skills
@@ -20,7 +20,7 @@ blueprints/.claude/skills/
 | **architecture** | System architecture and design patterns |
 | **deployment** | Cloud Run deployment for MCP servers |
 | **snowflake** | Snowflake database setup and best practices |
-| **blueprints** | Blueprints workflow, skills, and commands |
+| **blueprint** | Blueprint workflow, skills, and commands |
 | **brand** | Brand voice, copywriting, and terminology |
 | **ui** | UI patterns and design system (load with brand) |
 

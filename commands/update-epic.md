@@ -14,7 +14,7 @@ Update an epic's documentation after a session. Reviews work done and proposes c
 
 ## What This Command Does
 
-1. **Read existing EPIC.md** from `blueprints/pods/pm/epics/{epic-name}/`
+1. **Read existing EPIC.md** from `blueprint/pods/pm/epics/{epic-name}/`
 2. **Review session work** - Look at conversation history for decisions, requirement changes, new questions
 3. **Scan linked features** - Check current status of all features with `Epic: {epic-name}`
 4. **Propose updates** - Show diff of proposed changes to EPIC.md

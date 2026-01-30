@@ -37,19 +37,19 @@ You are an expert planning specialist for the Mindset AI platform, focused on cr
 All plans must be written to a pod/feature structure:
 
 ```
-blueprints/pods/[pod-name]/features/[feature-name]/
+blueprint/pods/[pod-name]/features/[feature-name]/
 ├── FEAT.md         # Plan goes in "What's Next" section
 ├── TRACKING.md     # Branches, files, deployment order
 └── archive/        # Historical documents
 ```
 
 **If feature specified** (e.g., "feat-journeys: add X"):
-- Find it at `blueprints/pods/*/features/feat-journeys/`
+- Find it at `blueprint/pods/*/features/feat-journeys/`
 - Use that location
 
 **If new feature needed**:
 - Ask user which pod: `wip`, `ps1`, `ps2`, or `platform`
-- Create the folder structure from templates at `blueprints/pods/_template/features/_template/`
+- Create the folder structure from templates at `blueprint/pods/_template/features/_template/`
 - Initialize FEAT.md and TRACKING.md
 
 **Available pods:**
@@ -72,7 +72,7 @@ blueprints/pods/[pod-name]/features/[feature-name]/
 - flutter
 ```
 
-Read each skill file from `blueprints/.claude/skills/{skill}/SKILL.md`
+Read each skill file from `blueprint/.claude/skills/{skill}/SKILL.md`
 
 **If new feature** - Ask user which skills are relevant, or infer:
 - Python backend work → `python`, `grpc`
@@ -99,7 +99,7 @@ Available skills: `python`, `flutter`, `react`, `grpc`, `firebase`, `mcp`, `test
    - Deployment order and dependencies
    - Files already changed
 
-3. **Technology Landscape** (`blueprints/planning/domains/00-technology-landscape.md`)
+3. **Technology Landscape** (`blueprint/planning/domains/00-technology-landscape.md`)
    - Platform architecture overview
    - Key concepts and working assumptions
 
@@ -144,7 +144,7 @@ Present the plan to the user for approval, then write to FEAT.md and TRACKING.md
 # Implementation Plan: [Feature Name]
 
 ## Feature Location
-`blueprints/pods/[pod]/features/[feature-name]/`
+`blueprint/pods/[pod]/features/[feature-name]/`
 
 ## Skills Loaded
 - [skill 1] - [brief description]
@@ -274,8 +274,8 @@ After writing the plan, you MUST output this instruction:
 ## ✅ Plan Written Successfully
 
 The implementation plan has been saved to:
-- `blueprints/pods/[pod]/features/[feature-name]/FEAT.md` (What's Next section)
-- `blueprints/pods/[pod]/features/[feature-name]/TRACKING.md` (Branches & Files)
+- `blueprint/pods/[pod]/features/[feature-name]/FEAT.md` (What's Next section)
+- `blueprint/pods/[pod]/features/[feature-name]/TRACKING.md` (Branches & Files)
 
 ## ⚠️ CRITICAL: Start a New Session for Implementation
 

@@ -1,14 +1,14 @@
 {
-  "name": "blueprints-plugin",
+  "name": "blueprint-plugin",
   "owner": {
     "name": "Mindset AI"
   },
   "metadata": {
-    "description": "Claude Code configurations for Mindset AI blueprints development"
+    "description": "Claude Code configurations for Mindset AI blueprint development"
   },
   "plugins": [
     {
-      "name": "blueprints-plugin",
+      "name": "blueprint-plugin",
       "source": "./",
       "description": "Agents, skills, hooks, commands, and rules for Mindset AI development",
       "author": {

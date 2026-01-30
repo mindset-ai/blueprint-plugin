@@ -1,8 +1,8 @@
-# blueprints-plugin
+# blueprint-plugin
 
 ## A Developer Force-Multiplier System
 
-> **One Developer + Claude Code + Blueprints = Full-Stack Development Team**
+> **One Developer + Claude Code + Blueprint = Full-Stack Development Team**
 
 This plugin transforms Claude Code from a coding assistant into an **intelligent development orchestrator**. It enables each developer to effectively manage a team of AI-driven specialists — planners, architects, testers, reviewers, and implementers — working in harmony across your entire platform stack.
 
@@ -10,7 +10,7 @@ This plugin transforms Claude Code from a coding assistant into an **intelligent
 
 ## Watch the Video
 
-[![Blueprints Plugin Overview](https://img.youtube.com/vi/RGXmYNv1KT4/maxresdefault.jpg)](https://youtu.be/RGXmYNv1KT4)
+[![Blueprint Plugin Overview](https://img.youtube.com/vi/RGXmYNv1KT4/maxresdefault.jpg)](https://youtu.be/RGXmYNv1KT4)
 
 ---
 
@@ -29,13 +29,13 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 ```json
 {
   "enabledPlugins": {
-    "mindset-claude-code@blueprints-plugin": true
+    "mindset-claude-code@blueprint-plugin": true
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
       "source": {
         "source": "directory",
-        "path": "/path/to/blueprints-plugin"
+        "path": "/path/to/blueprint-plugin"
       }
     }
   }
@@ -90,7 +90,7 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 
 | Command | What it does |
 |---------|--------------|
-| `/checkpoint` | Save session state to blueprints. Creates handoff document with context for next session. |
+| `/checkpoint` | Save session state to blueprint. Creates handoff document with context for next session. |
 | `/update-docs` | Sync documentation. Updates READMEs, API docs, and guides based on code changes. |
 | `/update-codemaps` | Regenerate codemaps. Updates `docs/CODEMAPS/*` with current codebase structure. |
 
@@ -201,12 +201,12 @@ Always-follow guidelines loaded into every session:
 
 ---
 
-## Epic & Feature Structure (Blueprints)
+## Epic & Feature Structure (Blueprint)
 
 ### Epics (Product owns - `pm` pod)
 
 ```
-blueprints/pods/pm/epics/{epic-name}/
+blueprint/pods/pm/epics/{epic-name}/
 ├── EPIC.md         # Requirements, user stories, scope, success metrics
 └── research/       # Research documents and analysis
 ```
@@ -214,7 +214,7 @@ blueprints/pods/pm/epics/{epic-name}/
 ### Features (Engineering owns - pod-specific)
 
 ```
-blueprints/pods/{pod}/features/{feature}/
+blueprint/pods/{pod}/features/{feature}/
 ├── FEAT.md         # THE living document - status, epic link, blockers, patterns, skills, local dev
 ├── TRACKING.md     # Cross-repo branches, deployment order, files changed
 ├── context.md      # Current state, session log

@@ -15,21 +15,21 @@ Load all context needed to work on a feature. This is the recommended first comm
 
 ## What This Command Does
 
-1. **Find the feature** at `blueprints/pods/*/features/{feature-name}/`
+1. **Find the feature** at `blueprint/pods/*/features/{feature-name}/`
 2. **Read feature documents** in this order:
    - `FEAT.md` or `FEATURE.md` (primary living document)
    - `TRACKING.md` (branches, deployment order, files changed)
    - `context.md` (current state, blockers, decisions)
    - `CLAUDE.md` (feature-specific instructions and gotchas)
 3. **Read the latest handoff** from `handoffs/` folder (most recent session summary)
-4. **Check the Epic field** in FEAT.md. If set (not N/A), read `blueprints/pods/pm/epics/{epic-name}/EPIC.md` to load parent epic context
+4. **Check the Epic field** in FEAT.md. If set (not N/A), read `blueprint/pods/pm/epics/{epic-name}/EPIC.md` to load parent epic context
 5. **Parse the Skills section** from FEAT.md and read each declared skill
 6. **Output a concise summary** so you're ready to work
 
 ## Feature Document Locations
 
 ```
-blueprints/pods/{pod}/features/{feature-name}/
+blueprint/pods/{pod}/features/{feature-name}/
 ├── FEAT.md         # Overview, status, architecture, skills declaration
 ├── TRACKING.md     # Cross-repo branches, deployment order
 ├── context.md      # Current state, blockers, what's next
@@ -50,7 +50,7 @@ Features declare required skills in their FEAT.md:
 - react
 ```
 
-Available skills are located at `blueprints/.claude/skills/{skill}/SKILL.md`:
+Available skills are located at `blueprint/.claude/skills/{skill}/SKILL.md`:
 - `python` - Pythonia cloud functions, LangGraph, gRPC services
 - `flutter` - Flutter/Dart, GetX, ReactiveRecord, Admin Framework
 - `react` - React SDK v3 development
@@ -93,7 +93,7 @@ Ready to work on {feature-name}.
 If the feature folder doesn't exist, list available features:
 
 ```bash
-ls -d blueprints/pods/*/features/feat-* 2>/dev/null | xargs -n1 basename
+ls -d blueprint/pods/*/features/feat-* 2>/dev/null | xargs -n1 basename
 ```
 
 And prompt the user to choose one or create a new feature with `/new-feature`.

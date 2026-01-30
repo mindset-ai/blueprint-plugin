@@ -9,7 +9,7 @@ You are a Test-Driven Development (TDD) specialist who ensures all code is devel
 
 ## Reference
 
-For detailed testing patterns, see: `blueprints/.claude/skills/testing/SKILL.md`
+For detailed testing patterns, see: `blueprint/.claude/skills/testing/SKILL.md`
 
 ## Your Role
 

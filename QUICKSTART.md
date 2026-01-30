@@ -2,9 +2,9 @@
 
 ## What Is This?
 
-The Blueprints system is made up of **two repositories** that work together:
+The Blueprint system is made up of **two repositories** that work together:
 
-### 1. blueprints (the knowledge base)
+### 1. blueprint (the knowledge base)
 
 This is where all the **documentation lives**:
 
@@ -15,7 +15,7 @@ This is where all the **documentation lives**:
 
 Think of it as **the team's shared brain** — everything anyone needs to know about any feature, captured in markdown files that survive across sessions and developers.
 
-### 2. blueprints-plugin (the tooling)
+### 2. blueprint-plugin (the tooling)
 
 This is the **Claude Code plugin** that makes the knowledge base useful:
 
@@ -29,9 +29,9 @@ Think of it as **the smart assistant** that knows how to navigate the knowledge 
 
 ## Why Two Repos?
 
-**blueprints** grows constantly — every feature adds docs, every session adds handoffs, every decision gets recorded.
+**blueprint** grows constantly — every feature adds docs, every session adds handoffs, every decision gets recorded.
 
-**blueprints-plugin** is relatively stable — the commands and agents don't change often.
+**blueprint-plugin** is relatively stable — the commands and agents don't change often.
 
 Keeping them separate means:
 - The plugin can be versioned independently
@@ -42,10 +42,10 @@ Keeping them separate means:
 
 ## What's In Each Repo?
 
-### blueprints/
+### blueprint/
 
 ```
-blueprints/
+blueprint/
 ├── .claude/
 │   └── skills/           # Domain knowledge (python, flutter, react, grpc, etc.)
 ├── pods/                 # Teams organized by pod
@@ -61,10 +61,10 @@ blueprints/
 │   └── platform/         # Infrastructure
 ```
 
-### blueprints-plugin/
+### blueprint-plugin/
 
 ```
-blueprints-plugin/
+blueprint-plugin/
 ├── commands/             # Slash commands (/load-feature, /plan-feature, /tdd, etc.)
 ├── agents/               # Specialized sub-agents (planner, reviewer, etc.)
 ├── rules/                # Always-on guidelines (security, testing, git)
@@ -78,15 +78,15 @@ blueprints-plugin/
 
 1. **You run a command** like `/load-feature feat-journeys`
 
-2. **The plugin** (from blueprints-plugin) handles the command
+2. **The plugin** (from blueprint-plugin) handles the command
 
-3. **The plugin reads** the feature docs from the blueprints repo
+3. **The plugin reads** the feature docs from the blueprint repo
 
 4. **Claude gets context** — all the decisions, blockers, handoffs, and relevant skills
 
 5. **You work** with full awareness of what's been done and what needs doing
 
-6. **At session end**, `/checkpoint` saves your progress back to blueprints for the next person
+6. **At session end**, `/checkpoint` saves your progress back to blueprint for the next person
 
 ---
 
@@ -101,11 +101,11 @@ The VS Code extension requires **manual installation**:
 mkdir -p ~/.claude/commands ~/.claude/agents ~/.claude/rules
 
 # 2. Copy plugin files
-cp /path/to/blueprints-plugin/commands/*.md ~/.claude/commands/
-cp /path/to/blueprints-plugin/agents/*.md ~/.claude/agents/
-cp /path/to/blueprints-plugin/rules/*.md ~/.claude/rules/
+cp /path/to/blueprint-plugin/commands/*.md ~/.claude/commands/
+cp /path/to/blueprint-plugin/agents/*.md ~/.claude/agents/
+cp /path/to/blueprint-plugin/rules/*.md ~/.claude/rules/
 
-# 3. Add blueprints repo to allowed directories in ~/.claude/settings.json
+# 3. Add blueprint repo to allowed directories in ~/.claude/settings.json
 ```
 
 Example `~/.claude/settings.json`:
@@ -114,8 +114,8 @@ Example `~/.claude/settings.json`:
 {
   "allowedDirectories": [
     "/path/to/your/project",
-    "/path/to/blueprints-plugin",
-    "/path/to/blueprints"
+    "/path/to/blueprint-plugin",
+    "/path/to/blueprint"
   ]
 }
 ```
@@ -129,13 +129,13 @@ The CLI supports the plugin marketplace system. Add to `~/.claude/settings.json`
 ```json
 {
   "enabledPlugins": {
-    "mindset-claude-code@blueprints-plugin": true
+    "mindset-claude-code@blueprint-plugin": true
   },
   "extraKnownMarketplaces": {
     "mindset-claude-code": {
       "source": {
         "source": "directory",
-        "path": "/path/to/blueprints-plugin"
+        "path": "/path/to/blueprint-plugin"
       }
     }
   }

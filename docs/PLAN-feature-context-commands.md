@@ -35,11 +35,11 @@ After analyzing existing commands (`/plan-feature`, `/tdd`, `/checkpoint`), we d
 
 ## `/load-feature` Command
 
-**File:** `blueprints-plugin/commands/load-feature.md`
+**File:** `blueprint-plugin/commands/load-feature.md`
 
 ### What It Does
 
-1. **Find the feature** at `blueprints/pods/*/features/{feature-name}/`
+1. **Find the feature** at `blueprint/pods/*/features/{feature-name}/`
 2. **Read feature documents** in order:
    - `FEAT.md` or `FEATURE.md` (primary living document)
    - `TRACKING.md` (branches, deployment order)
@@ -47,7 +47,7 @@ After analyzing existing commands (`/plan-feature`, `/tdd`, `/checkpoint`), we d
    - `CLAUDE.md` (feature-specific instructions)
 3. **Read latest handoff** from `handoffs/` folder
 4. **Parse Skills section** from FEAT.md
-5. **Read each declared skill** from `blueprints/.claude/skills/{skill}/SKILL.md`
+5. **Read each declared skill** from `blueprint/.claude/skills/{skill}/SKILL.md`
 6. **Output summary** - status, blockers, last session, what's next, skills loaded
 
 ### Skills Declaration
@@ -64,7 +64,7 @@ Features declare required skills in FEAT.md:
 
 ### Available Skills
 
-Located at `blueprints/.claude/skills/{skill}/SKILL.md`:
+Located at `blueprint/.claude/skills/{skill}/SKILL.md`:
 
 | Skill | Description | Approx Tokens |
 |-------|-------------|---------------|
@@ -118,7 +118,7 @@ Ready to work on feat-journeys.
 
 ## `/update-feature` Command
 
-**File:** `blueprints-plugin/commands/update-feature.md`
+**File:** `blueprint-plugin/commands/update-feature.md`
 
 ### What It Does
 
@@ -155,7 +155,7 @@ Always show diff before applying changes. User must confirm.
 
 ## FEAT.md Template Update
 
-**File:** `blueprints/pods/_template/features/_template/FEAT.md`
+**File:** `blueprint/pods/_template/features/_template/FEAT.md`
 
 Added Skills section after Key Capabilities:
 
@@ -164,7 +164,7 @@ Added Skills section after Key Capabilities:
 
 ## Skills
 
-<!-- Loaded automatically by /load-feature. See blueprints/.claude/skills/ for available skills. -->
+<!-- Loaded automatically by /load-feature. See blueprint/.claude/skills/ for available skills. -->
 <!-- Available: python, flutter, react, grpc, firebase, mcp, testing, architecture -->
 
 - {skill-1}
@@ -229,7 +229,7 @@ Added Skills sections to:
 | Skills declared in FEAT.md | Feature authors decide what's relevant, single source of truth |
 | Separate load/update commands | Clear read vs write responsibilities |
 | `/update-feature` requires confirmation | User controls what gets written |
-| Skills in `blueprints/.claude/skills/` | Centralized, reusable across features |
+| Skills in `blueprint/.claude/skills/` | Centralized, reusable across features |
 
 ---
 
@@ -237,12 +237,12 @@ Added Skills sections to:
 
 | File | Action |
 |------|--------|
-| `blueprints-plugin/commands/load-feature.md` | Created |
-| `blueprints-plugin/commands/update-feature.md` | Created |
-| `blueprints-plugin/README.md` | Updated with new commands |
-| `blueprints/pods/_template/features/_template/FEAT.md` | Added Skills section |
-| `blueprints/pods/wip/features/feat-journeys/FEATURE.md` | Added Skills section |
-| `blueprints/pods/wip/features/feat-widget-mcp/FEAT.md` | Added Skills section |
+| `blueprint-plugin/commands/load-feature.md` | Created |
+| `blueprint-plugin/commands/update-feature.md` | Created |
+| `blueprint-plugin/README.md` | Updated with new commands |
+| `blueprint/pods/_template/features/_template/FEAT.md` | Added Skills section |
+| `blueprint/pods/wip/features/feat-journeys/FEATURE.md` | Added Skills section |
+| `blueprint/pods/wip/features/feat-widget-mcp/FEAT.md` | Added Skills section |
 
 ---
 
@@ -298,7 +298,7 @@ To verify implementation:
 
 ## References
 
-- **Command files:** `blueprints-plugin/commands/`
-- **Skill files:** `blueprints/.claude/skills/*/SKILL.md`
-- **Feature template:** `blueprints/pods/_template/features/_template/`
-- **Existing features:** `blueprints/pods/wip/features/`
+- **Command files:** `blueprint-plugin/commands/`
+- **Skill files:** `blueprint/.claude/skills/*/SKILL.md`
+- **Feature template:** `blueprint/pods/_template/features/_template/`
+- **Existing features:** `blueprint/pods/wip/features/`

@@ -49,7 +49,7 @@ REPEAT:   Next feature/scenario
 ## Related Skill
 
 For comprehensive testing patterns and conventions, see the testing skill:
-`blueprints/.claude/skills/testing/SKILL.md`
+`blueprint/.claude/skills/testing/SKILL.md`
 
 ---
 
@@ -792,6 +792,6 @@ Never skip the RED phase. Never write code before tests.
 
 ## Related Resources
 
-- **Testing Skill**: `blueprints/.claude/skills/testing/SKILL.md`
+- **Testing Skill**: `blueprint/.claude/skills/testing/SKILL.md`
 - **tdd-guide Agent**: `~/.claude/agents/tdd-guide.md`
-- **tdd-workflow Skill**: `blueprints/.claude/skills/tdd-workflow/`
+- **tdd-workflow Skill**: `blueprint/.claude/skills/tdd-workflow/`
