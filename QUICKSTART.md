@@ -145,10 +145,10 @@ The CLI supports the plugin marketplace system. Add to `~/.claude/settings.json`
 ```json
 {
   "enabledPlugins": {
-    "mindset-claude-code@blueprint-plugin": true
+    "blueprint-plugin@blueprint-plugin": true
   },
   "extraKnownMarketplaces": {
-    "mindset-claude-code": {
+    "blueprint-plugin": {
       "source": {
         "source": "directory",
         "path": "/path/to/blueprint-plugin"
