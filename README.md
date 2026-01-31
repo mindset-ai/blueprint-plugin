@@ -91,8 +91,7 @@ Commands, agents, and rules to accelerate development across Flutter, Python, an
 | Command | What it does |
 |---------|--------------|
 | `/checkpoint` | Save session state to blueprint. Creates handoff document with context for next session. |
-| `/update-docs` | Sync documentation. Updates READMEs, API docs, and guides based on code changes. |
-| `/update-codemaps` | Regenerate codemaps. Updates `docs/CODEMAPS/*` with current codebase structure. |
+| `/update-docs` | Update sdk2-docs site. Creates/edits MDX pages based on current feature work. |
 
 ### Other
 
@@ -182,7 +181,7 @@ Specialized subagents that handle delegated tasks:
 | `build-error-resolver` | Fixing build/type/lint errors |
 | `e2e-runner` | Generating and running E2E tests |
 | `refactor-cleaner` | Finding and removing dead code |
-| `doc-updater` | Updating documentation and codemaps |
+| `doc-updater` | Updating sdk2-docs documentation site |
 
 ---
 
