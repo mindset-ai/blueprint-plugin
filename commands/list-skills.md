@@ -21,15 +21,23 @@ List all available skills with their names and descriptions.
 
 ## Output Format
 
-Display results as a markdown table:
+Display results as a code block containing an ASCII table (NOT a markdown pipe-table, as the CLI renders those poorly):
 
 ```
-| Skill | Description |
-|-------|-------------|
-| ai-agent | LangGraph-based AI Agent v3 patterns... |
-| architecture | System design, cross-repo patterns... |
-| ... | ... |
+┌──────────────┬─────────────────────────────────────────────────┐
+│ Skill        │ Description                                     │
+├──────────────┼─────────────────────────────────────────────────┤
+│ ai-agent     │ LangGraph-based AI Agent v3 patterns...         │
+├──────────────┼─────────────────────────────────────────────────┤
+│ architecture │ System design, cross-repo patterns...           │
+├──────────────┼─────────────────────────────────────────────────┤
+│ ...          │ ...                                             │
+└──────────────┴─────────────────────────────────────────────────┘
 ```
+
+Add a `├──────────────┼──...┤` separator line between EVERY row, not just after the header.
+
+IMPORTANT: Wrap the table in a fenced code block (```) so it renders with monospace alignment.
 
 After the table, show:
 - Total count of available skills

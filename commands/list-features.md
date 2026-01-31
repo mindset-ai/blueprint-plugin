@@ -24,15 +24,21 @@ List all features organized by pod.
 
 ## Output Format
 
-Display results as a markdown table:
+Display results as a code block containing an ASCII table (NOT a markdown pipe-table, as the CLI renders those poorly):
 
 ```
-| Pod | Feature | Status |
-|-----|---------|--------|
-| platform | blueprint-claude-code-setup | Active |
-| wip | feat-journeys | In Progress |
-| wip | feat-widget-mcp | In Progress |
+┌──────────┬─────────────────────────────┬─────────────┐
+│ Pod      │ Feature                     │ Status      │
+├──────────┼─────────────────────────────┼─────────────┤
+│ platform │ blueprint-claude-code-setup │ Active      │
+├──────────┼─────────────────────────────┼─────────────┤
+│ wip      │ feat-journeys               │ In Progress │
+├──────────┼─────────────────────────────┼─────────────┤
+│ wip      │ feat-widget-mcp             │ In Progress │
+└──────────┴─────────────────────────────┴─────────────┘
 ```
+
+IMPORTANT: Wrap the table in a fenced code block (```) so it renders with monospace alignment. Add a `├───┼───┤` separator line between EVERY row, not just after the header.
 
 After the table, show:
 - Total count of features
