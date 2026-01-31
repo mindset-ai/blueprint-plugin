@@ -39,6 +39,7 @@ The command supports common aliases that map to the canonical skill names:
 | `design-system`, `components`, `theming` | `ui` | UI patterns and design system |
 | `clickhouse`, `ch`, `analytics`, `mcp-events` | `tinybird` | TinyBird ClickHouse analytics |
 | `agent`, `aiagent`, `agent-v3`, `aiagent-v3` | `ai-agent` | AI Agent v3 LangGraph patterns |
+| `workflow-automation`, `integrations` | `n8n` | n8n workflow automation |
 
 ## Available Skills
 
@@ -61,6 +62,7 @@ Located at `blueprint/.claude/skills/{skill}/SKILL.md`:
 | `ui` | UI patterns and design system (load with brand) |
 | `tinybird` | TinyBird ClickHouse real-time analytics |
 | `ai-agent` | AI Agent v3 LangGraph patterns and node development |
+| `n8n` | n8n workflow automation for Mindset AI integrations |
 
 ## What This Command Does
 
@@ -200,6 +202,10 @@ const SKILL_ALIASES = {
   'ch': 'tinybird',
   'analytics': 'tinybird',
   'events': 'tinybird',
+
+  // n8n
+  'workflow-automation': 'n8n',
+  'integrations': 'n8n',
 };
 ```
 
