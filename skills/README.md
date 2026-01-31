@@ -25,6 +25,7 @@ blueprint/.claude/skills/
 | **brand** | Brand voice, copywriting, and terminology |
 | **ui** | UI patterns and design system (load with brand) |
 | **tinybird** | TinyBird ClickHouse real-time analytics |
+| **n8n** | n8n workflow automation patterns for Mindset AI integrations |
 
 ## Usage
 
